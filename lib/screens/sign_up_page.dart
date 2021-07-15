@@ -22,7 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
   String _email;
   String _password;
 
-  // AuthService _authService = AuthService();
+  AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -213,22 +213,22 @@ class _SignUpPageState extends State<SignUpPage> {
     _email = _emailController.text;
     _password = _passwordController.text;
 
-    // if (_email.isEmpty || _password.isEmpty) return;
+    if (_email.isEmpty || _password.isEmpty) return;
 
-    // Userdom userdom = await _authService.singUnWithEmailAndPassword(
-    //     _email.trim(), _password.trim());
-    // if (userdom = null) {
-    //   Fluttertoast.showToast(
-    //       msg: "Can't Sign-Up you, please check your email and password",
-    //       toastLength: Toast.LENGTH_SHORT,
-    //       gravity: ToastGravity.CENTER,
-    //       timeInSecForIosWeb: 1,
-    //       backgroundColor: Colors.red,
-    //       textColor: Colors.white,
-    //       fontSize: 16.0);
-    // } else {
-    //   _emailController.clear();
-    //   _passwordController.clear();
-    // }
+    Userdom userdom = await _authService.singUnWithEmailAndPassword(
+        _email.trim(), _password.trim());
+    if (userdom = null) {
+      Fluttertoast.showToast(
+          msg: "Can't Sign-Up you, please check your email and password",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else {
+      _emailController.clear();
+      _passwordController.clear();
+    }
   }
 }
