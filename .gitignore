@@ -1,7 +1,7 @@
 .dart_tool/
-.idea
-.vscode
-assets
+.idea/
+.vscode/
+assets/songs
 
 # Miscellaneous
 *.class
