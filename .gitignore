@@ -1,7 +1,7 @@
 .dart_tool/
 .idea/
 .vscode/
-assets/songs
+
 
 # Miscellaneous
 *.class
@@ -38,6 +38,7 @@ assets/songs
 .dart_tool/
 .idea/
 .vscode/
+
 
 # Web related
 lib/generated_plugin_registrant.dart
