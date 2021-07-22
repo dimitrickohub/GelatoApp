@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/classes/language.dart';
+import 'package:flutter_application_2/localization/language_constants.dart';
+import 'package:flutter_application_2/my_app.dart';
 import 'package:flutter_application_2/theme/colors.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -8,6 +12,11 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  void _changeLanguage(Language language) async {
+    Locale _locale = await setLocale(language.languageCode);
+    MyApp.setLocale(context, _locale);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
       title: Container(
         alignment: Alignment.centerLeft,
         child: Text(
-          "Settings",
+          getTranslated(context, 'settings'),
           style: TextStyle(
             fontSize: 20,
             color: white,
@@ -69,13 +78,57 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: white, fontWeight: FontWeight.w600, fontSize: 15),
                 ),
                 Text(
-                  'dima229131@gamil.com',
+                  'dima229131@gmail.com',
                   style: TextStyle(
                       color: white, fontWeight: FontWeight.w600, fontSize: 15),
                 ),
               ],
             ),
           ]),
+          SizedBox(
+            height: 25,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Container(
+              width: 50,
+              height: 50,
+              alignment: Alignment.bottomLeft,
+              child: DropdownButton<Language>(
+                dropdownColor: primary,
+                iconSize: 30,
+                hint: Text(
+                  getTranslated(context, 'change_language'),
+                  style: TextStyle(
+                      color: white, fontWeight: FontWeight.w600, fontSize: 15),
+                ),
+                onChanged: (Language language) {
+                  _changeLanguage(language);
+                },
+                items: Language.languageList()
+                    .map<DropdownMenuItem<Language>>(
+                      (e) => DropdownMenuItem<Language>(
+                        value: e,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              e.flag,
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(e.name)
+                          ],
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          ),
         ],
       ),
     );

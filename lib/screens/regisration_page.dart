@@ -1,5 +1,8 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/domain/user.dart';
+import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/root_app.dart';
 import 'package:flutter_application_2/screens/sign_up_page.dart';
 import 'package:flutter_application_2/sevices/auth.dart';
@@ -60,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     alignment: Alignment.center,
                     padding: EdgeInsets.all(10),
                     child: Text(
-                      'Welcome Back!',
+                      getTranslated(context, 'welcome_back'),
                       style: TextStyle(
                           color: grey,
                           fontWeight: FontWeight.w600,
@@ -109,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           controller: _emailController,
                           style: TextStyle(color: white),
                           decoration: InputDecoration(
-                            hintText: "User name",
+                            hintText: getTranslated(context, 'user_name'),
                             hintStyle: TextStyle(
                               color: primary.withAlpha(120),
                             ),
@@ -160,10 +163,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       Expanded(
                         child: TextField(
+                          obscureText: true,
                           controller: _passwordController,
                           style: TextStyle(color: white),
                           decoration: InputDecoration(
-                            hintText: "Password",
+                            hintText: getTranslated(context, 'password'),
                             hintStyle: TextStyle(
                               color: primary.withAlpha(120),
                             ),
@@ -175,20 +179,29 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 15,
                 ),
                 Container(
                     height: 60,
                     width: 400,
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: RaisedButton(
-                      splashColor: primary,
-                      highlightColor: primary,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      color: primary,
+                    child: ElevatedButton(
+                      // splashColor: primary,
+                      // highlightColor: primary,
+                      // style: RoundedRectangleBorder(
+                      //     borderRadius: BorderRadius.circular(10)),
+                      // color: primary,
+                      style: ElevatedButton.styleFrom(
+                        primary: primary,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        // padding: EdgeInsets.symmetric(
+                        //     horizontal: 50, vertical: 20),
+                        // textStyle: TextStyle(
+                        //     fontSize: 30, fontWeight: FontWeight.bold)
+                      ),
                       child: Text(
-                        'Sign-In',
+                        getTranslated(context, 'sign_in'),
                         style: TextStyle(
                             color: white,
                             fontWeight: FontWeight.w600,
@@ -196,8 +209,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       onPressed: () {
                         _signInButtonAction();
-                        print(_emailController.text);
-                        print(_passwordController.text);
                         Navigator.push(
                             context,
                             PageTransition(
@@ -210,7 +221,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Row(
                   children: <Widget>[
                     Text(
-                      'Does not have account?',
+                      getTranslated(context, 'sign_up_text'),
                       style: TextStyle(
                           color: grey,
                           fontWeight: FontWeight.w600,
@@ -218,7 +229,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     FlatButton(
                       child: Text(
-                        'Sign up',
+                        getTranslated(context, 'sign_up'),
                         style: TextStyle(
                             color: primary,
                             fontWeight: FontWeight.w600,
@@ -243,6 +254,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void _signInButtonAction() async {
     _email = _emailController.text;
     _password = _passwordController.text;
+    developer.log(_email);
 
     if (_email.isEmpty || _password.isEmpty) return;
 

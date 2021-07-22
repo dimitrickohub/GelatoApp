@@ -64,6 +64,7 @@ class _AlbumPageState extends State<AlbumPage> {
                         "Subscribe",
                         style: TextStyle(color: white),
                       ),
+                      color: primary,
                       onPressed: () {
                         Navigator.push(
                             context,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/songsJson.dart/songs_json.dart';
 import 'package:flutter_application_2/theme/colors.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -42,7 +43,7 @@ class _SearchPageState extends State<SearchPage> {
                   child: TextField(
                     style: TextStyle(color: white),
                     decoration: InputDecoration(
-                      hintText: "Search",
+                      hintText: getTranslated(context, 'search'),
                       hintStyle: TextStyle(
                         color: primary.withAlpha(120),
                       ),
@@ -64,7 +65,7 @@ class _SearchPageState extends State<SearchPage> {
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Text(
-              "Maybe you are looking for:",
+              getTranslated(context, 'search_text'),
               style: TextStyle(
                 fontSize: 20,
                 color: primary,

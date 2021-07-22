@@ -195,14 +195,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       onPressed: () {
                         _signUpButtonAction();
-                        print(_emailController.text);
-                        print(_passwordController.text);
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                alignment: Alignment.center,
-                                child: RootApp(),
-                                type: PageTransitionType.scale));
+                        // print(_emailController.text);
+                        // print(_passwordController.text);
+                        // Navigator.push(
+                        //     context,
+                        //     PageTransition(
+                        //         alignment: Alignment.center,
+                        //         child: RootApp(),
+                        //         type: PageTransitionType.scale));
                       },
                     )),
               ],

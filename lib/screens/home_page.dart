@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/classes/language.dart';
+import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/screens/album_page.dart';
 import 'package:flutter_application_2/screens/settings_page.dart';
 import 'package:flutter_application_2/songsJson.dart/songs_json.dart';
@@ -32,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Explore",
+              getTranslated(context, 'explore'),
               style: TextStyle(
                 fontSize: 20,
                 color: white,
