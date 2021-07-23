@@ -1,6 +1,9 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/domain/user.dart';
-import 'package:flutter_application_2/root_app.dart';
+import 'package:flutter_application_2/localization/language_constants.dart';
+
 import 'package:flutter_application_2/sevices/auth.dart';
 
 import 'package:flutter_application_2/theme/colors.dart';
@@ -68,23 +71,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(
                   height: 20,
                 ),
-                // Container(
-                //   decoration: BoxDecoration(
-                //     color: Colors.white.withAlpha(12),
-                //     borderRadius: BorderRadius.all(
-                //       Radius.circular(20),
-                //     ),
-                //   ),
-                //   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                //   child: TextField(
-                //     style: TextStyle(color: white),
-                //     controller: nameController,
-                //     decoration: InputDecoration(
-                //         border: InputBorder.none,
-                //         labelText: 'User Name',
-                //         labelStyle: TextStyle(color: white)),
-                //   ),
-                // ),
                 Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
@@ -122,23 +108,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(
                   height: 25,
                 ),
-                // Container(
-                //   height: 50,
-                //   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                //   child: TextField(
-                //     style: TextStyle(color: white),
-                //     obscureText: true,
-                //     controller: passwordController,
-                //     decoration: InputDecoration(
-                //         fillColor: Colors.white.withAlpha(12),
-                //         filled: true,
-                //         border: OutlineInputBorder(
-                //           borderSide: BorderSide(color: primary),
-                //         ),
-                //         labelText: 'Password',
-                //         labelStyle: TextStyle(color: white)),
-                //   ),
-                // ),
                 Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
@@ -159,6 +128,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       Expanded(
                         child: TextField(
+                          obscureText: true,
                           controller: _passwordController,
                           style: TextStyle(color: white),
                           decoration: InputDecoration(
@@ -174,20 +144,20 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 15,
                 ),
                 Container(
                     height: 60,
                     width: 400,
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: RaisedButton(
-                      splashColor: primary,
-                      highlightColor: primary,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      color: primary,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: primary,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
                       child: Text(
-                        'Sign-Up',
+                        getTranslated(context, 'sign_up'),
                         style: TextStyle(
                             color: white,
                             fontWeight: FontWeight.w600,
@@ -195,14 +165,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       onPressed: () {
                         _signUpButtonAction();
-                        // print(_emailController.text);
-                        // print(_passwordController.text);
-                        // Navigator.push(
-                        //     context,
-                        //     PageTransition(
-                        //         alignment: Alignment.center,
-                        //         child: RootApp(),
-                        //         type: PageTransitionType.scale));
                       },
                     )),
               ],
@@ -212,6 +174,8 @@ class _SignUpPageState extends State<SignUpPage> {
   void _signUpButtonAction() async {
     _email = _emailController.text;
     _password = _passwordController.text;
+
+    developer.log(_email);
 
     if (_email.isEmpty || _password.isEmpty) return;
 

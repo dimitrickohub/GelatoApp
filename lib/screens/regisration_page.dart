@@ -126,23 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(
                   height: 25,
                 ),
-                // Container(
-                //   height: 50,
-                //   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                //   child: TextField(
-                //     style: TextStyle(color: white),
-                //     obscureText: true,
-                //     controller: passwordController,
-                //     decoration: InputDecoration(
-                //         fillColor: Colors.white.withAlpha(12),
-                //         filled: true,
-                //         border: OutlineInputBorder(
-                //           borderSide: BorderSide(color: primary),
-                //         ),
-                //         labelText: 'Password',
-                //         labelStyle: TextStyle(color: white)),
-                //   ),
-                // ),
+
                 Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
@@ -186,19 +170,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: 400,
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                     child: ElevatedButton(
-                      // splashColor: primary,
-                      // highlightColor: primary,
-                      // style: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(10)),
-                      // color: primary,
                       style: ElevatedButton.styleFrom(
                         primary: primary,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
-                        // padding: EdgeInsets.symmetric(
-                        //     horizontal: 50, vertical: 20),
-                        // textStyle: TextStyle(
-                        //     fontSize: 30, fontWeight: FontWeight.bold)
                       ),
                       child: Text(
                         getTranslated(context, 'sign_in'),
@@ -209,12 +184,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       onPressed: () {
                         _signInButtonAction();
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                alignment: Alignment.center,
-                                child: RootApp(),
-                                type: PageTransitionType.scale));
+                        _pageTransition();
                       },
                     )),
                 Container(
@@ -227,7 +197,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           fontWeight: FontWeight.w600,
                           fontSize: 15),
                     ),
-                    FlatButton(
+                    TextButton(
                       child: Text(
                         getTranslated(context, 'sign_up'),
                         style: TextStyle(
@@ -249,6 +219,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 ))
               ],
             )));
+  }
+
+  void _pageTransition() {
+    Navigator.push(
+        context,
+        PageTransition(
+            alignment: Alignment.center,
+            child: RootApp(),
+            type: PageTransitionType.scale));
   }
 
   void _signInButtonAction() async {

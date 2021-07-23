@@ -3,8 +3,6 @@ import 'package:flutter_application_2/classes/language.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/my_app.dart';
 import 'package:flutter_application_2/theme/colors.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:page_transition/page_transition.dart';
 
 class SettingsPage extends StatefulWidget {
   @override

@@ -9,5 +9,6 @@
     "search": "Search",
     "search_text": "Maybe you are looking for:",
     "settings": "Settings",
-    "change_language": "Change Language"
+    "change_language": "Change Language",
+    "not_found": "Oops, nothing found ..."
 }

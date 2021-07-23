@@ -9,5 +9,6 @@
     "search": "Поиск",
     "search_text": "Может быть вы искали:",
     "settings": "Настройки",
-    "change_language": "Сменить язык"
+    "change_language": "Сменить язык",
+    "not_found": "Упс, ничего не найдено..."
 }
