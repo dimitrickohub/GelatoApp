@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/domain/user.dart';
+import 'package:flutter_application_2/landing.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/router/custom_router.dart';
 import 'package:flutter_application_2/router/route_constants.dart';
 import 'package:flutter_application_2/screens/regisration_page.dart';
+import 'package:flutter_application_2/sevices/auth.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
 import 'localization/localization.dart';
 
@@ -46,31 +50,35 @@ class _MyAppState extends State<MyApp> {
         ),
       );
     } else {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: RegisterPage(),
-        locale: _locale,
-        supportedLocales: [
-          Locale("en", "US"),
-          Locale("ru", "RU"),
-        ],
-        localizationsDelegates: [
-          Localization.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        localeResolutionCallback: (locale, supportedLocales) {
-          for (var supportedLocale in supportedLocales) {
-            if (supportedLocale.languageCode == locale.languageCode &&
-                supportedLocale.countryCode == locale.countryCode) {
-              return supportedLocale;
+      return StreamProvider<Userdom>.value(
+        value: AuthService().currentUser,
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: LandingPage(),
+          // home: RegisterPage(),
+          locale: _locale,
+          supportedLocales: [
+            Locale("en", "US"),
+            Locale("ru", "RU"),
+          ],
+          localizationsDelegates: [
+            Localization.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          localeResolutionCallback: (locale, supportedLocales) {
+            for (var supportedLocale in supportedLocales) {
+              if (supportedLocale.languageCode == locale.languageCode &&
+                  supportedLocale.countryCode == locale.countryCode) {
+                return supportedLocale;
+              }
             }
-          }
-          return supportedLocales.first;
-        },
-        onGenerateRoute: CustomRouter.generatedRoute,
-        initialRoute: homeRoute,
+            return supportedLocales.first;
+          },
+          onGenerateRoute: CustomRouter.generatedRoute,
+          initialRoute: homeRoute,
+        ),
       );
     }
   }
