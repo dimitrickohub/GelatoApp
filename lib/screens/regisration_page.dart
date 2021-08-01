@@ -187,7 +187,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       onPressed: () {
                         developer.log('signIn');
                         _signInButtonAction();
-                        _pageTransition();
+                        // _pageTransition();
                       },
                     )),
                 Container(
