@@ -12,11 +12,12 @@ class AuthService {
       User user = result.user;
       return Userdom.fromFirebase(user);
     } catch (e) {
+      print(e);
       return null;
     }
   }
 
-  Future<Userdom> singUnWithEmailAndPassword(
+  Future<Userdom> singUpWithEmailAndPassword(
       String email, String password) async {
     try {
       UserCredential result = await _fAuth.createUserWithEmailAndPassword(

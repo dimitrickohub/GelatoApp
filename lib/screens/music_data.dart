@@ -25,14 +25,13 @@ class MusicData extends StatefulWidget {
 }
 
 class _MusicDataState extends State<MusicData> {
-  double _currentSliderValue = 20;
+  double _currentSliderValue = 0;
 
   AudioPlayer advancedPlayer;
   AudioCache audioCache;
   bool isPlaying = true;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     initPalyer();
   }
@@ -61,7 +60,6 @@ class _MusicDataState extends State<MusicData> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     stopSound(widget.songUrl);
   }
@@ -183,32 +181,32 @@ class _MusicDataState extends State<MusicData> {
               min: 0,
               max: 200,
               onChanged: (value) {
+                seekSound();
                 setState(() {
                   _currentSliderValue = value;
                 });
-                seekSound();
               }),
+          // SizedBox(
+          //   height: 20,
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 30, right: 30),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Text(
+          //         "00:00",
+          //         style: TextStyle(color: white.withOpacity(0.5)),
+          //       ),
+          //       Text(
+          //         "45:54",
+          //         style: TextStyle(color: white.withOpacity(0.5)),
+          //       )
+          //     ],
+          //   ),
+          // ),
           SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "00:00",
-                  style: TextStyle(color: white.withOpacity(0.5)),
-                ),
-                Text(
-                  "45:54",
-                  style: TextStyle(color: white.withOpacity(0.5)),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 15,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
@@ -232,10 +230,8 @@ class _MusicDataState extends State<MusicData> {
                 IconButton(
                     iconSize: 50,
                     icon: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: primary,
-                      ),
+                      decoration:
+                          BoxDecoration(shape: BoxShape.circle, color: primary),
                       child: Center(
                         child: Icon(
                           isPlaying
@@ -278,7 +274,7 @@ class _MusicDataState extends State<MusicData> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

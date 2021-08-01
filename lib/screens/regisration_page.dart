@@ -13,7 +13,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key key}) : super(key: key);
+  const RegisterPage({
+    Key key,
+  }) : super(key: key);
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -183,6 +185,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fontSize: 20),
                       ),
                       onPressed: () {
+                        developer.log('signIn');
                         _signInButtonAction();
                         _pageTransition();
                       },
@@ -237,20 +240,21 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if (_email.isEmpty || _password.isEmpty) return;
 
-    Userdom userdom = await _authService.singInWithEmailAndPassword(
+    Userdom user = await _authService.singInWithEmailAndPassword(
         _email.trim(), _password.trim());
-    if (userdom = null) {
+    if (user == null) {
       Fluttertoast.showToast(
           msg: "Can't Sign-In you, please check your email and password",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 3,
+          backgroundColor: primary,
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
       _emailController.clear();
       _passwordController.clear();
+      _pageTransition();
     }
   }
 }

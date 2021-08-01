@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/classes/language.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/my_app.dart';
+import 'package:flutter_application_2/screens/regisration_page.dart';
+import 'package:flutter_application_2/sevices/auth.dart';
+
 import 'package:flutter_application_2/theme/colors.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -125,6 +128,19 @@ class _SettingsPageState extends State<SettingsPage> {
                     )
                     .toList(),
               ),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          TextButton(
+            onPressed: () {
+              AuthService().logOut();
+            },
+            child: Text(
+              getTranslated(context, 'log_out'),
+              style: TextStyle(
+                  color: primary, fontWeight: FontWeight.w900, fontSize: 20),
             ),
           ),
         ],

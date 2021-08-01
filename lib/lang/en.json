@@ -10,5 +10,7 @@
     "search_text": "Maybe you are looking for:",
     "settings": "Settings",
     "change_language": "Change Language",
-    "not_found": "Oops, nothing found ..."
+    "not_found": "Oops, nothing found ...",
+    "favorites": "Favorites",
+    "log_out": "LOG OUT"
 }

@@ -59,23 +59,22 @@ class _AlbumPageState extends State<AlbumPage> {
                     // child: Padding(
                     //   padding: const EdgeInsets.only(
                     //       left: 12, right: 12, top: 8, bottom: 8),
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       child: Text(
                         "Subscribe",
                         style: TextStyle(color: white),
                       ),
-                      color: primary,
+                      style: ElevatedButton.styleFrom(primary: primary),
                       onPressed: () {
                         Navigator.push(
                             context,
-                            PageTransition(
-                                alignment: Alignment.topRight,
-                                child: FavoritePage(),
-                                type: PageTransitionType.scale));
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  new FavoritePage(),
+                            ));
                       },
                     ),
                   ),
-                  // ),
                 ],
               ),
             ),

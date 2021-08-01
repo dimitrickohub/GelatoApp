@@ -3,6 +3,7 @@ import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/domain/user.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
+import 'package:flutter_application_2/root_app.dart';
 
 import 'package:flutter_application_2/sevices/auth.dart';
 
@@ -171,28 +172,38 @@ class _SignUpPageState extends State<SignUpPage> {
             )));
   }
 
+  void _pageTransition() {
+    Navigator.push(
+        context,
+        PageTransition(
+            alignment: Alignment.center,
+            child: RootApp(),
+            type: PageTransitionType.scale));
+  }
+
   void _signUpButtonAction() async {
     _email = _emailController.text;
     _password = _passwordController.text;
 
-    developer.log(_email);
+    developer.log(_email + "вот имэил");
 
     if (_email.isEmpty || _password.isEmpty) return;
 
-    Userdom userdom = await _authService.singUnWithEmailAndPassword(
+    Userdom user = await _authService.singUpWithEmailAndPassword(
         _email.trim(), _password.trim());
-    if (userdom = null) {
+    if (user == null) {
       Fluttertoast.showToast(
           msg: "Can't Sign-Up you, please check your email and password",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 3,
+          backgroundColor: primary,
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
       _emailController.clear();
       _passwordController.clear();
+      _pageTransition();
     }
   }
 }
