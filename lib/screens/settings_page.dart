@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/classes/language.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_application_2/screens/regisration_page.dart';
 import 'package:flutter_application_2/sevices/auth.dart';
 
 import 'package:flutter_application_2/theme/colors.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -136,6 +139,12 @@ class _SettingsPageState extends State<SettingsPage> {
           TextButton(
             onPressed: () {
               AuthService().logOut();
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      alignment: Alignment.center,
+                      child: RegisterPage(),
+                      type: PageTransitionType.scale));
             },
             child: Text(
               getTranslated(context, 'log_out'),
