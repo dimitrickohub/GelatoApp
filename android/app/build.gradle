@@ -40,7 +40,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.flutter_application_2"
+        applicationId "com.app.gelato"
         minSdkVersion 25 
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()

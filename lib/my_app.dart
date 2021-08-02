@@ -4,7 +4,6 @@ import 'package:flutter_application_2/landing.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/router/custom_router.dart';
 import 'package:flutter_application_2/router/route_constants.dart';
-import 'package:flutter_application_2/screens/regisration_page.dart';
 import 'package:flutter_application_2/sevices/auth.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
