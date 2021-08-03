@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/root_app.dart';
 import 'package:flutter_application_2/router/route_constants.dart';
 import 'package:flutter_application_2/screens/regisration_page.dart';
 

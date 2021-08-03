@@ -32,6 +32,6 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/album_img/
     - assets/images/
-    - assets/songs/
     - lib/lang/

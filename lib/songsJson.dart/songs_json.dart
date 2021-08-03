@@ -18,7 +18,7 @@ const List song_type_2 = [
 ];
 const List songs = [
   {
-    "img": "images1/img_1.jpg",
+    "img": "album_img/img_1.jpg",
     "title": "I love You",
     "description": "The Neighbourhood",
     "song_count": "19 songs",
@@ -40,7 +40,7 @@ const List songs = [
     ]
   },
   {
-    "img": "images1/img_2.jpg",
+    "img": "album_img/img_2.jpg",
     "title": "Wiped Out!",
     "description": "The Neighbourhood",
     "song_count": "324 songs",
@@ -59,7 +59,7 @@ const List songs = [
     ]
   },
   {
-    "img": "images1/img_3.jpg",
+    "img": "album_img/img_3.jpg",
     "title": "BLOND",
     "description": "Frank Ocean",
     "song_count": "195 songs",
@@ -78,7 +78,7 @@ const List songs = [
     ]
   },
   {
-    "img": "images1/img_4.jpg",
+    "img": "album_img/img_4.jpg",
     "title": "PLAYERS CLUB",
     "description": "OBLADAET",
     "song_count": "599 songs",
@@ -97,7 +97,7 @@ const List songs = [
     ]
   },
   {
-    "img": "images1/img_5.jpg",
+    "img": "album_img/img_5.jpg",
     "title": "GHETTO GARDEN",
     "description": "MAYOT",
     "song_count": "317 songs",
@@ -116,7 +116,7 @@ const List songs = [
     ]
   },
   {
-    "img": "images1/img_6.jpg",
+    "img": "album_img/img_6.jpg",
     "title": "RAPP2",
     "description": "Boulevard Depo",
     "song_count": "130 songs",
@@ -135,7 +135,7 @@ const List songs = [
     ]
   },
   {
-    "img": "images1/img_7.jpg",
+    "img": "album_img/img_7.jpg",
     "title": "Flower Boy",
     "description": "Tyler The Creator",
     "song_count": "50 songs",
@@ -153,7 +153,7 @@ const List songs = [
     ]
   },
   {
-    "img": "images1/img_8.jpg",
+    "img": "album_img/img_8.jpg",
     "title": "Chill",
     "description": "Kick back to the best new and recent chill tunes.",
     "song_count": "69 songs",
@@ -172,7 +172,7 @@ const List songs = [
     ]
   },
   {
-    "img": "images1/img_9.jpg",
+    "img": "album_img/img_9.jpg",
     "title": "Sad Songs",
     "description": "Beautiful songs to break your heart...",
     "song_count": "60 songs",
@@ -191,7 +191,7 @@ const List songs = [
     ]
   },
   {
-    "img": "images1/img_10.jpg",
+    "img": "album_img/img_10.jpg",
     "title": "Lo-Fi Beats",
     "description": "Beats to relax, study and focus.",
     "song_count": "75 songs",
