@@ -9,6 +9,7 @@ import 'package:flutter_application_2/sevices/auth.dart';
 
 import 'package:flutter_application_2/theme/colors.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -22,6 +23,11 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final spinkit = SpinKitRotatingCircle(
+    color: Colors.white,
+    size: 50.0,
+  );
+
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -74,28 +80,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(
                   height: 20,
                 ),
-                // Container(
-                //   decoration: BoxDecoration(
-                //     color: Colors.white.withAlpha(12),
-                //     borderRadius: BorderRadius.all(
-                //       Radius.circular(20),
-                //     ),
-                //   ),
-                //   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                //   child: TextField(
-                //     style: TextStyle(color: white),
-                //     controller: nameController,
-                //     decoration: InputDecoration(
-                //         border: InputBorder.none,
-                //         labelText: 'User Name',
-                //         labelStyle: TextStyle(color: white)),
-                //   ),
-                // ),
                 Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
                   decoration: BoxDecoration(
-                    color: Colors.white.withAlpha(10),
+                    color: Colors.white.withAlpha(20),
                     borderRadius: BorderRadius.all(
                       Radius.circular(20),
                     ),
@@ -128,12 +117,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(
                   height: 25,
                 ),
-
                 Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
                   decoration: BoxDecoration(
-                    color: Colors.white.withAlpha(10),
+                    color: Colors.white.withAlpha(20),
                     borderRadius: BorderRadius.all(
                       Radius.circular(20),
                     ),
@@ -230,7 +218,7 @@ class _RegisterPageState extends State<RegisterPage> {
         PageTransition(
             alignment: Alignment.center,
             child: RootApp(),
-            type: PageTransitionType.scale));
+            type: PageTransitionType.fade));
   }
 
   void _signInButtonAction() async {
