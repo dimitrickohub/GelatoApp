@@ -15,7 +15,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  SaveData email = SaveData();
+  SaveData prefs = SaveData();
 
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
@@ -79,7 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  email.localStorage.get('email'),
+                  prefs.localStorage.get('email').toString(),
                   style: TextStyle(
                       color: white, fontWeight: FontWeight.w600, fontSize: 15),
                 ),

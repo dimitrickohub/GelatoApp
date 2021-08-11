@@ -172,10 +172,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             fontSize: 20),
                       ),
                       onPressed: () {
-                        developer.log('signIn');
-
                         _signInButtonAction();
-                        _pageTransition();
+                        // _pageTransition();
                       },
                     )),
                 Container(
@@ -224,6 +222,8 @@ class _RegisterPageState extends State<RegisterPage> {
   void _signInButtonAction() async {
     _email = _emailController.text;
     _password = _passwordController.text;
+    _saveData.saveLoginPass(
+        _emailController.text.toString(), _passwordController.text.toString());
     developer.log(_email);
 
     if (_email.isEmpty || _password.isEmpty) return;
@@ -243,8 +243,8 @@ class _RegisterPageState extends State<RegisterPage> {
       _emailController.clear();
       _passwordController.clear();
       _pageTransition();
-      _saveData.saveLoginPass(_emailController.text.toString(),
-          _passwordController.text.toString());
+
+      developer.log(_saveData.localStorage.getString('email'));
     }
   }
 }
