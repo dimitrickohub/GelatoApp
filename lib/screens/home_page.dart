@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget getAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: black,
       elevation: 0,
       title: Padding(

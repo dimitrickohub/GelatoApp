@@ -40,20 +40,20 @@ class _MusicDataState extends State<MusicData> {
     playSound(widget.songUrl);
   }
 
-  playSound(localPAth) async {
-    await audioCache.play(localPAth);
+  playSound(remoteUrl) async {
+    await advancedPlayer.play(remoteUrl);
   }
 
-  stopSound(localPath) async {
-    Uri audioFile = await audioCache.load(localPath);
-    await advancedPlayer.setUrl(audioFile.path);
-    advancedPlayer.stop();
+  stopSound(remoteUrl) async {
+    // Uri audioFile = await audioCache.load(remoteUrl);
+    // await advancedPlayer.setUrl(audioFile.path);
+    advancedPlayer.pause();
   }
 
   seekSound() async {
-    Uri audioFile = await audioCache.load(widget.songUrl);
-    await advancedPlayer.setUrl(audioFile.path);
-    advancedPlayer.seek(Duration(milliseconds: 2000));
+    // Uri audioFile =  await audioCache.load(widget.songUrl);
+    // await advancedPlayer.setUrl(audioFile.path);
+    advancedPlayer.seek(Duration(milliseconds: 1200));
   }
 
   @override
@@ -207,24 +207,32 @@ class _MusicDataState extends State<MusicData> {
             height: 10,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            padding: const EdgeInsets.only(left: 40, right: 30),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // IconButton(
+                //     icon: Icon(
+                //       Feather.shuffle,
+                //       color: white.withOpacity(0.8),
+                //       size: 25,
+                //     ),
+                //     onPressed: null),
                 IconButton(
-                    icon: Icon(
-                      Feather.shuffle,
-                      color: white.withOpacity(0.8),
-                      size: 25,
-                    ),
-                    onPressed: null),
-                IconButton(
-                    icon: Icon(
-                      Feather.skip_back,
-                      color: white.withOpacity(0.8),
-                      size: 25,
-                    ),
-                    onPressed: null),
+                  icon: Icon(
+                    Feather.skip_back,
+                    color: white.withOpacity(0.8),
+                    size: 25,
+                  ),
+                  onPressed: () {
+                    // Navigator.push(
+                    //     context,
+                    //     PageTransition(
+                    //         alignment: Alignment.bottomCenter,
+                    //         child: MusicData(),
+                    //         type: PageTransitionType.scale));
+                  },
+                ),
                 IconButton(
                     iconSize: 50,
                     icon: Container(
@@ -261,13 +269,13 @@ class _MusicDataState extends State<MusicData> {
                       size: 25,
                     ),
                     onPressed: null),
-                IconButton(
-                    icon: Icon(
-                      AntDesign.retweet,
-                      color: white.withOpacity(0.8),
-                      size: 25,
-                    ),
-                    onPressed: null),
+                // IconButton(
+                //     icon: Icon(
+                //       AntDesign.retweet,
+                //       color: white.withOpacity(0.8),
+                //       size: 25,
+                //     ),
+                //     onPressed: null),
               ],
             ),
           ),

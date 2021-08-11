@@ -22,6 +22,7 @@ class _FavoritePageState extends State<FavoritePage> {
 
   Widget getAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: black,
       elevation: 0,
       title: Container(

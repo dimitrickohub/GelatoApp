@@ -18,13 +18,14 @@ const List song_type_2 = [
 ];
 const List songs = [
   {
-    "img": "album_img/img_1.jpg",
+    "img": "assets/album_img/img_1.jpg",
     "title": "I love You",
     "description": "The Neighbourhood",
     "song_count": "19 songs",
     "date": "about 19 hr",
     "color": Color(0xFF808080),
-    "song_url": "songs/1.mp3",
+    "song_url":
+        "https://assets.mixkit.co/music/preview/mixkit-hazy-after-hours-132.mp3",
     "songs": [
       {"title": ". How", "duration": "5:14"},
       {"title": ". Afraid", "duration": "4:11"},
@@ -40,7 +41,7 @@ const List songs = [
     ]
   },
   {
-    "img": "album_img/img_2.jpg",
+    "img": "assets/album_img/img_2.jpg",
     "title": "Wiped Out!",
     "description": "The Neighbourhood",
     "song_count": "324 songs",
@@ -59,7 +60,7 @@ const List songs = [
     ]
   },
   {
-    "img": "album_img/img_3.jpg",
+    "img": "assets/album_img/img_3.jpg",
     "title": "BLOND",
     "description": "Frank Ocean",
     "song_count": "195 songs",
@@ -78,7 +79,7 @@ const List songs = [
     ]
   },
   {
-    "img": "album_img/img_4.jpg",
+    "img": "assets/album_img/img_4.jpg",
     "title": "PLAYERS CLUB",
     "description": "OBLADAET",
     "song_count": "599 songs",
@@ -97,7 +98,7 @@ const List songs = [
     ]
   },
   {
-    "img": "album_img/img_5.jpg",
+    "img": "assets/album_img/img_5.jpg",
     "title": "GHETTO GARDEN",
     "description": "MAYOT",
     "song_count": "317 songs",
@@ -116,7 +117,7 @@ const List songs = [
     ]
   },
   {
-    "img": "album_img/img_6.jpg",
+    "img": "assets/album_img/img_6.jpg",
     "title": "RAPP2",
     "description": "Boulevard Depo",
     "song_count": "130 songs",
@@ -135,7 +136,7 @@ const List songs = [
     ]
   },
   {
-    "img": "album_img/img_7.jpg",
+    "img": "assets/album_img/img_7.jpg",
     "title": "Flower Boy",
     "description": "Tyler The Creator",
     "song_count": "50 songs",
@@ -153,7 +154,7 @@ const List songs = [
     ]
   },
   {
-    "img": "album_img/img_8.jpg",
+    "img": "assets/album_img/img_8.jpg",
     "title": "Chill",
     "description": "Kick back to the best new and recent chill tunes.",
     "song_count": "69 songs",
@@ -172,7 +173,7 @@ const List songs = [
     ]
   },
   {
-    "img": "album_img/img_9.jpg",
+    "img": "assets/album_img/img_9.jpg",
     "title": "Sad Songs",
     "description": "Beautiful songs to break your heart...",
     "song_count": "60 songs",
@@ -191,7 +192,7 @@ const List songs = [
     ]
   },
   {
-    "img": "album_img/img_10.jpg",
+    "img": "assets/album_img/img_10.jpg",
     "title": "Lo-Fi Beats",
     "description": "Beats to relax, study and focus.",
     "song_count": "75 songs",

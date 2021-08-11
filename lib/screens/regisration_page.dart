@@ -1,15 +1,17 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/classes/sharedpref.dart';
 import 'package:flutter_application_2/domain/user.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/root_app.dart';
+
 import 'package:flutter_application_2/screens/sign_up_page.dart';
 import 'package:flutter_application_2/sevices/auth.dart';
 
 import 'package:flutter_application_2/theme/colors.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -23,10 +25,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final spinkit = SpinKitRotatingCircle(
-    color: Colors.white,
-    size: 50.0,
-  );
+  SaveData _saveData = SaveData();
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -174,6 +173,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       onPressed: () {
                         developer.log('signIn');
+
                         _signInButtonAction();
                         _pageTransition();
                       },
@@ -243,6 +243,8 @@ class _RegisterPageState extends State<RegisterPage> {
       _emailController.clear();
       _passwordController.clear();
       _pageTransition();
+      _saveData.saveLoginPass(_emailController.text.toString(),
+          _passwordController.text.toString());
     }
   }
 }

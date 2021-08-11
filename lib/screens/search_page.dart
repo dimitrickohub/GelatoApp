@@ -1,5 +1,3 @@
-import 'dart:developer' as developer;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/songsJson.dart/songs_json.dart';
@@ -54,6 +52,9 @@ class _SearchPageState extends State<SearchPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        SizedBox(
+          height: 20,
+        ),
         Container(
           margin: EdgeInsets.only(top: 10),
           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),

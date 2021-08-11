@@ -51,6 +51,7 @@ class _MyAppState extends State<MyApp> {
     } else {
       return StreamProvider<Userdom>.value(
         value: AuthService().currentUser,
+        initialData: null,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           home: LandingPage(),

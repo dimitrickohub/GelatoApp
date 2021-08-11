@@ -1,6 +1,7 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/classes/sharedpref.dart';
 import 'package:flutter_application_2/domain/user.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/root_app.dart';
@@ -20,6 +21,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  SaveData _saveData = SaveData();
+
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -185,7 +188,8 @@ class _SignUpPageState extends State<SignUpPage> {
     _email = _emailController.text;
     _password = _passwordController.text;
 
-    developer.log(_email + "вот имэил");
+    developer.log(_email + " вот имэил");
+    developer.log(_email + " вот пароль");
 
     if (_email.isEmpty || _password.isEmpty) return;
 
@@ -204,6 +208,8 @@ class _SignUpPageState extends State<SignUpPage> {
       _emailController.clear();
       _passwordController.clear();
       _pageTransition();
+      _saveData.saveLoginPass(_emailController.text.toString(),
+          _passwordController.text.toString());
     }
   }
 }

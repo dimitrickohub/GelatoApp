@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/classes/language.dart';
+import 'package:flutter_application_2/classes/sharedpref.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/my_app.dart';
 import 'package:flutter_application_2/screens/regisration_page.dart';
@@ -14,6 +15,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  SaveData email = SaveData();
+
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
@@ -73,16 +76,17 @@ class _SettingsPageState extends State<SettingsPage> {
               width: 10,
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Dmitry Rachko',
+                  email.localStorage.get('email'),
                   style: TextStyle(
                       color: white, fontWeight: FontWeight.w600, fontSize: 15),
                 ),
                 Text(
-                  'dima229131@gmail.com',
+                  getTranslated(context, 'my_profile'),
                   style: TextStyle(
-                      color: white, fontWeight: FontWeight.w600, fontSize: 15),
+                      color: white, fontWeight: FontWeight.w600, fontSize: 12),
                 ),
               ],
             ),
@@ -134,20 +138,28 @@ class _SettingsPageState extends State<SettingsPage> {
           SizedBox(
             height: 15,
           ),
-          TextButton(
-            onPressed: () {
-              AuthService().logOut();
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      alignment: Alignment.center,
-                      child: RegisterPage(),
-                      type: PageTransitionType.scale));
-            },
-            child: Text(
-              getTranslated(context, 'log_out'),
-              style: TextStyle(
-                  color: primary, fontWeight: FontWeight.w900, fontSize: 20),
+          Padding(
+            padding: const EdgeInsets.only(left: 130, right: 130),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: primary,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+              ),
+              child: Text(
+                getTranslated(context, 'log_out'),
+                style: TextStyle(
+                    color: white, fontWeight: FontWeight.w600, fontSize: 18),
+              ),
+              onPressed: () {
+                AuthService().logOut();
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        alignment: Alignment.center,
+                        child: RegisterPage(),
+                        type: PageTransitionType.scale));
+              },
             ),
           ),
         ],
