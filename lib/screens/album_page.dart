@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_application_2/screens/favorite_page.dart';
+import 'package:flutter_application_2/localization/language_constants.dart';
+
 import 'package:flutter_application_2/screens/music_data.dart';
 import 'package:flutter_application_2/songsJson.dart/songs_json.dart';
 import 'package:flutter_application_2/theme/colors.dart';
@@ -16,6 +17,8 @@ class AlbumPage extends StatefulWidget {
 }
 
 class _AlbumPageState extends State<AlbumPage> {
+  bool _hasBeenPressed = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,26 +57,46 @@ class _AlbumPageState extends State<AlbumPage> {
                           fontWeight: FontWeight.bold,
                           color: white)),
                   Container(
-                    decoration: BoxDecoration(
-                        color: grey, borderRadius: BorderRadius.circular(5)),
+                    // decoration: BoxDecoration(
+                    //     color: grey, borderRadius: BorderRadius.circular(5)),
                     // child: Padding(
                     //   padding: const EdgeInsets.only(
                     //       left: 12, right: 12, top: 8, bottom: 8),
                     child: ElevatedButton(
-                      child: Text(
-                        "Subscribe",
-                        style: TextStyle(color: white),
-                      ),
-                      style: ElevatedButton.styleFrom(primary: primary),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  new FavoritePage(),
-                            ));
-                      },
-                    ),
+                        child: Text(
+                          _hasBeenPressed
+                              ? getTranslated(context, 'subscription')
+                              : getTranslated(context, 'subscribe'),
+                          style: TextStyle(color: white),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              if (_hasBeenPressed)
+                                return grey;
+                              else
+                                return primary;
+                            },
+                          ),
+                        ),
+                        onPressed: () => {
+                              setState(() {
+                                _hasBeenPressed = !_hasBeenPressed;
+                              }),
+                              setState(() {})
+                            }
+                        // =>
+                        //     setState(() => pressAttention = !pressAttention)
+                        // {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (BuildContext context) =>
+                        //           new FavoritePage(),
+                        // ));
+                        // },
+                        ),
                   ),
                 ],
               ),
