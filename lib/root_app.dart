@@ -29,23 +29,6 @@ class _RootAppState extends State<RootApp> {
         HomePage(),
         SearchPage(),
         FavoritePage(),
-        // Center(
-        //   child: Text(
-        //     "Home",
-        //     style: TextStyle(
-        //         fontSize: 20, color: white, fontWeight: FontWeight.bold),
-        //   ),
-        // ),
-        // Center(
-        //   child: Text("Serch",
-        //       style: TextStyle(
-        //           fontSize: 20, color: white, fontWeight: FontWeight.bold)),
-        // ),
-        // Center(
-        //   child: Text("Favorite",
-        //       style: TextStyle(
-        //           fontSize: 20, color: white, fontWeight: FontWeight.bold)),
-        // )
       ],
     );
   }

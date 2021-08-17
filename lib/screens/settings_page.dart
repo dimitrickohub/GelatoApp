@@ -158,24 +158,6 @@ class _SettingsPageState extends State<SettingsPage> {
           SizedBox(
             height: 25,
           ),
-          // Padding(
-          //     padding: const EdgeInsets.only(left: 20),
-          //     child: Container(
-          //       width: 50,
-          //       height: 50,
-          //       alignment: Alignment.bottomLeft,
-          //       child: TextButton(
-          //         style: ButtonStyle(
-          //           foregroundColor: MaterialStateProperty.all<Color>(white),
-          //         ),
-          //         onPressed: () {
-          //           enterFullScreen(FullScreenMode.EMERSIVE_STICKY);
-          //         },
-          //         child: Text('Full Screen',
-          //             style:
-          //                 TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
-          //       ),
-          //     )),
           Padding(
             padding: const EdgeInsets.only(left: 130, right: 130),
             child: ElevatedButton(
