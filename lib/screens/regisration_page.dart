@@ -25,7 +25,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  SaveData _saveData = SaveData();
+  bool _loading = false;
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -158,24 +158,34 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 60,
                     width: 400,
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: primary,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                      child: Text(
-                        getTranslated(context, 'sign_in'),
-                        style: TextStyle(
-                            color: white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20),
-                      ),
-                      onPressed: () {
-                        _signInButtonAction();
-                        // _pageTransition();
-                      },
-                    )),
+                    child: !_loading
+                        ? ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: primary,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                            child: Text(
+                              getTranslated(context, 'sign_in'),
+                              style: TextStyle(
+                                  color: white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20),
+                            ),
+                            onPressed: () {
+                              _signInButtonAction();
+                              setState(() => _loading = true);
+                            },
+                          )
+
+                        //_pageTransition();
+
+                        : Center(
+                            child: CircularProgressIndicator(
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(primary),
+                            ),
+                          )),
                 Container(
                     child: Row(
                   children: <Widget>[
@@ -222,9 +232,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void _signInButtonAction() async {
     _email = _emailController.text;
     _password = _passwordController.text;
-    _saveData.saveLoginPass(
-        _emailController.text.toString(), _passwordController.text.toString());
-    developer.log(_email);
+    SaveData.saveLoginPass(_email.trim(), _password.trim());
 
     if (_email.isEmpty || _password.isEmpty) return;
 
@@ -244,7 +252,7 @@ class _RegisterPageState extends State<RegisterPage> {
       _passwordController.clear();
       _pageTransition();
 
-      developer.log(_saveData.localStorage.getString('email'));
+      developer.log(SaveData.localStorage.getString('email'));
     }
   }
 }

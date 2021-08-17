@@ -17,7 +17,22 @@ class AlbumPage extends StatefulWidget {
 }
 
 class _AlbumPageState extends State<AlbumPage> {
-  bool _hasBeenPressed = false;
+  bool _isSub = false;
+  void _toggleFavorite() {
+    setState(() {
+      if (_isSub) {
+        _isSub = false;
+      } else {
+        _isSub = true;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    _toggleFavorite();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +79,7 @@ class _AlbumPageState extends State<AlbumPage> {
                     //       left: 12, right: 12, top: 8, bottom: 8),
                     child: ElevatedButton(
                         child: Text(
-                          _hasBeenPressed
+                          _isSub
                               ? getTranslated(context, 'subscription')
                               : getTranslated(context, 'subscribe'),
                           style: TextStyle(color: white),
@@ -73,19 +88,22 @@ class _AlbumPageState extends State<AlbumPage> {
                           backgroundColor:
                               MaterialStateProperty.resolveWith<Color>(
                             (Set<MaterialState> states) {
-                              if (_hasBeenPressed)
+                              if (_isSub)
                                 return grey;
                               else
                                 return primary;
                             },
                           ),
                         ),
-                        onPressed: () => {
-                              setState(() {
-                                _hasBeenPressed = !_hasBeenPressed;
-                              }),
-                              setState(() {})
-                            }
+                        onPressed: () {
+                          _toggleFavorite();
+                        }
+                        // () => {
+                        //       setState(() {
+                        //         _isSub = !_isSub;
+                        //       }),
+
+                        //     }
                         // =>
                         //     setState(() => pressAttention = !pressAttention)
                         // {
