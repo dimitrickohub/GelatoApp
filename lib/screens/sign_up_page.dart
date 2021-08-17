@@ -1,4 +1,4 @@
-import 'dart:developer' as developer;
+// import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/classes/sharedpref.dart';
@@ -21,8 +21,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  SaveData _saveData = SaveData();
-
+  bool _loading = false;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -79,7 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
                   decoration: BoxDecoration(
-                    color: Colors.white.withAlpha(10),
+                    color: Colors.white.withAlpha(20),
                     borderRadius: BorderRadius.all(
                       Radius.circular(20),
                     ),
@@ -116,7 +115,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
                   decoration: BoxDecoration(
-                    color: Colors.white.withAlpha(10),
+                    color: Colors.white.withAlpha(20),
                     borderRadius: BorderRadius.all(
                       Radius.circular(20),
                     ),
@@ -151,26 +150,34 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 15,
                 ),
                 Container(
-                    height: 60,
-                    width: 400,
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: primary,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                      child: Text(
-                        getTranslated(context, 'sign_up'),
-                        style: TextStyle(
-                            color: white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20),
-                      ),
-                      onPressed: () {
-                        _signUpButtonAction();
-                      },
-                    )),
+                  height: 60,
+                  width: 400,
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  child: !_loading
+                      ? ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: primary,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
+                          child: Text(
+                            getTranslated(context, 'sign_up'),
+                            style: TextStyle(
+                                color: white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20),
+                          ),
+                          onPressed: () {
+                            _signUpButtonAction();
+                            setState(() => _loading = true);
+                          },
+                        )
+                      : Center(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(primary),
+                          ),
+                        ),
+                )
               ],
             )));
   }
@@ -187,9 +194,7 @@ class _SignUpPageState extends State<SignUpPage> {
   void _signUpButtonAction() async {
     _email = _emailController.text;
     _password = _passwordController.text;
-
-    developer.log(_email + " вот имэил");
-    developer.log(_email + " вот пароль");
+    SaveData.saveLoginPass(_email.trim(), _password.trim());
 
     if (_email.isEmpty || _password.isEmpty) return;
 
@@ -208,8 +213,6 @@ class _SignUpPageState extends State<SignUpPage> {
       _emailController.clear();
       _passwordController.clear();
       _pageTransition();
-      _saveData.saveLoginPass(_emailController.text.toString(),
-          _passwordController.text.toString());
     }
   }
 }

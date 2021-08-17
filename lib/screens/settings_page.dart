@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/classes/language.dart';
 import 'package:flutter_application_2/classes/sharedpref.dart';
+
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/my_app.dart';
 import 'package:flutter_application_2/screens/regisration_page.dart';
 import 'package:flutter_application_2/sevices/auth.dart';
 
 import 'package:flutter_application_2/theme/colors.dart';
+import 'package:fullscreen/fullscreen.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -15,11 +18,28 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  SaveData prefs = SaveData();
+  String _email;
+
+  void enterFullScreen(FullScreenMode fullScreenMode) async {
+    await FullScreen.enterFullScreen(fullScreenMode);
+  }
 
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
+  }
+
+  @override
+  void initState() {
+    getInstance();
+    super.initState();
+  }
+
+  void getInstance() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _email = (prefs.getString('email') ?? '');
+    });
   }
 
   @override
@@ -79,7 +99,7 @@ class _SettingsPageState extends State<SettingsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  prefs.localStorage.get('email').toString(),
+                  _email,
                   style: TextStyle(
                       color: white, fontWeight: FontWeight.w600, fontSize: 15),
                 ),
@@ -136,8 +156,26 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           SizedBox(
-            height: 15,
+            height: 25,
           ),
+          // Padding(
+          //     padding: const EdgeInsets.only(left: 20),
+          //     child: Container(
+          //       width: 50,
+          //       height: 50,
+          //       alignment: Alignment.bottomLeft,
+          //       child: TextButton(
+          //         style: ButtonStyle(
+          //           foregroundColor: MaterialStateProperty.all<Color>(white),
+          //         ),
+          //         onPressed: () {
+          //           enterFullScreen(FullScreenMode.EMERSIVE_STICKY);
+          //         },
+          //         child: Text('Full Screen',
+          //             style:
+          //                 TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+          //       ),
+          //     )),
           Padding(
             padding: const EdgeInsets.only(left: 130, right: 130),
             child: ElevatedButton(
@@ -152,6 +190,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     color: white, fontWeight: FontWeight.w600, fontSize: 18),
               ),
               onPressed: () {
+                SaveData.remove();
                 AuthService().logOut();
                 Navigator.push(
                     context,

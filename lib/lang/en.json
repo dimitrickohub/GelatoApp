@@ -13,5 +13,7 @@
     "not_found": "Oops, nothing found ...",
     "favorites": "Favorites",
     "log_out": "Log out",
-    "my_profile": "My profile"
+    "my_profile": "My profile",
+    "subscribe" : "Subscribe",
+    "subscription" : "Subscription" 
 }

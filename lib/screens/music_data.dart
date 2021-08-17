@@ -23,7 +23,7 @@ class MusicData extends StatefulWidget {
 }
 
 class _MusicDataState extends State<MusicData> {
-  double _currentSliderValue = 0;
+  double _currentSliderValue = 10;
 
   AudioPlayer advancedPlayer;
   AudioCache audioCache;
@@ -51,7 +51,7 @@ class _MusicDataState extends State<MusicData> {
   }
 
   seekSound() async {
-    // Uri audioFile =  await audioCache.load(widget.songUrl);
+    // Uri audioFile = audioCache.load(widget.songUrl);
     // await advancedPlayer.setUrl(audioFile.path);
     advancedPlayer.seek(Duration(milliseconds: 1200));
   }

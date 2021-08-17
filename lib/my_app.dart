@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_application_2/domain/user.dart';
 import 'package:flutter_application_2/landing.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';

@@ -1,16 +1,31 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as developer;
 
 class SaveData {
-  SharedPreferences localStorage;
+  static SharedPreferences localStorage;
 
-  saveLoginPass(String email, String password) async {
+  static saveLoginPass(String email, String password) async {
     localStorage = await SharedPreferences.getInstance();
 
     localStorage.setString("email", email);
     localStorage.setString("password", password);
   }
 
-  deleteEmailPass(String email, String password) async {
+  static deleteEmailPass(String email, String password) async {
+    localStorage = await SharedPreferences.getInstance();
+    localStorage.remove('email');
+    localStorage.remove('password');
+  }
+
+  static getInstance() async {
+    localStorage = await SharedPreferences.getInstance();
+    String emailSP = localStorage.getString('email');
+    developer.log('SP ' + emailSP);
+    return emailSP;
+  }
+
+  static remove() async {
+    localStorage = await SharedPreferences.getInstance();
     localStorage.remove('email');
     localStorage.remove('password');
   }

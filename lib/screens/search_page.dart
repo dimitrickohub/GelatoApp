@@ -98,7 +98,7 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
         SizedBox(
-          height: 20,
+          height: 15,
         ),
         Expanded(
             child: _foundSongs.length > 0
