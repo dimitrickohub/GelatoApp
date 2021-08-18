@@ -1,6 +1,6 @@
 # GelatoApp
 
-Project Gelato is a music streaming application that allows you legally listen to music without downloading it to your device. Available for Android and IOS devices.
+Gelato project  is a music streaming application that allows you legally listen to music without downloading it to your device. Available for Android and IOS devices.
 
 ## Getting Started
 
