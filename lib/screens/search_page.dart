@@ -59,7 +59,7 @@ class _SearchPageState extends State<SearchPage> {
           margin: EdgeInsets.only(top: 10),
           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
           decoration: BoxDecoration(
-            color: Colors.white.withAlpha(10),
+            color: Colors.white.withAlpha(20),
             borderRadius: BorderRadius.all(
               Radius.circular(20),
             ),
