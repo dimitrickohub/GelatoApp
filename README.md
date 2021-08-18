@@ -1,6 +1,6 @@
-# flutter_application_2
+# GelatoApp
 
-A new Flutter project.
+Project Gelato is a music streaming application that allows you to legally listen to music without downloading it to your device. Available for Android and IOS devices.
 
 ## Getting Started
 
