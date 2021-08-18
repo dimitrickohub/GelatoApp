@@ -11,7 +11,6 @@ import 'package:flutter_application_2/sevices/auth.dart';
 import 'package:flutter_application_2/theme/colors.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:page_transition/page_transition.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key key}) : super(key: key);
@@ -183,12 +182,11 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _pageTransition() {
-    Navigator.push(
-        context,
-        PageTransition(
-            alignment: Alignment.center,
-            child: RootApp(),
-            type: PageTransitionType.scale));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => RootApp()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   void _signUpButtonAction() async {

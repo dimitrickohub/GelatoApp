@@ -221,12 +221,11 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _pageTransition() {
-    Navigator.push(
-        context,
-        PageTransition(
-            alignment: Alignment.center,
-            child: RootApp(),
-            type: PageTransitionType.fade));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => RootApp()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   void _signInButtonAction() async {
