@@ -114,15 +114,13 @@ class _SettingsPageState extends State<SettingsPage> {
           SizedBox(
             height: 25,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Container(
-              width: 50,
-              height: 50,
-              alignment: Alignment.bottomLeft,
+          Container(
+            padding: EdgeInsets.only(left: 20, right: 10),
+            child: DropdownButtonHideUnderline(
               child: DropdownButton<Language>(
                 dropdownColor: primary,
                 iconSize: 30,
+                iconEnabledColor: primary,
                 hint: Text(
                   getTranslated(context, 'change_language'),
                   style: TextStyle(
@@ -136,7 +134,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       (e) => DropdownMenuItem<Language>(
                         value: e,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
                               e.flag,
