@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_2/domain/user.dart';
@@ -6,7 +7,9 @@ import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/router/custom_router.dart';
 import 'package:flutter_application_2/router/route_constants.dart';
 import 'package:flutter_application_2/sevices/auth.dart';
+import 'package:flutter_application_2/theme/colors.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 import 'localization/localization.dart';
@@ -55,7 +58,15 @@ class _MyAppState extends State<MyApp> {
         initialData: null,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: LandingPage(),
+          home: AnimatedSplashScreen.withScreenFunction(
+              duration: 3000,
+              splash: 'images/logo.png',
+              screenFunction: () async {
+                return LandingPage();
+              },
+              splashTransition: SplashTransition.fadeTransition,
+              pageTransitionType: PageTransitionType.scale,
+              backgroundColor: black),
           // home: RegisterPage(),
           locale: _locale,
           supportedLocales: [
