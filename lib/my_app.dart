@@ -7,6 +7,7 @@ import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/router/custom_router.dart';
 import 'package:flutter_application_2/router/route_constants.dart';
 import 'package:flutter_application_2/sevices/auth.dart';
+import 'package:flutter_application_2/splash/splash_screen.dart';
 import 'package:flutter_application_2/theme/colors.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:page_transition/page_transition.dart';
@@ -43,6 +44,11 @@ class _MyAppState extends State<MyApp> {
     super.didChangeDependencies();
   }
 
+  final routes = <String, WidgetBuilder>{
+    // The path that creates the Home Screen
+    '/Home': (BuildContext context) => LandingPage()
+  };
+
   @override
   Widget build(BuildContext context) {
     if (this._locale == null) {
@@ -58,15 +64,8 @@ class _MyAppState extends State<MyApp> {
         initialData: null,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: AnimatedSplashScreen.withScreenFunction(
-              duration: 3000,
-              splash: 'images/logo.png',
-              screenFunction: () async {
-                return LandingPage();
-              },
-              splashTransition: SplashTransition.fadeTransition,
-              pageTransitionType: PageTransitionType.scale,
-              backgroundColor: black),
+          home: SplashScreen(nextRoute: '/Home'),
+          routes: routes,
           // home: RegisterPage(),
           locale: _locale,
           supportedLocales: [
