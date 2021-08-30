@@ -29,33 +29,35 @@ class _HomePageState extends State<HomePage> {
       automaticallyImplyLeading: false,
       backgroundColor: black,
       elevation: 0,
-      title: Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              getTranslated(context, 'explore'),
-              style: TextStyle(
-                fontSize: 20,
-                color: white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          alignment: Alignment.topRight,
-                          child: SettingsPage(),
-                          type: PageTransitionType.scale));
-                },
-                icon: Icon(
-                  Icons.settings,
+      title: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10, right: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                getTranslated(context, 'explore'),
+                style: TextStyle(
+                  fontSize: 20,
                   color: white,
-                ))
-          ],
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            alignment: Alignment.topRight,
+                            child: SettingsPage(),
+                            type: PageTransitionType.scale));
+                  },
+                  icon: Icon(
+                    Icons.settings,
+                    color: white,
+                  ))
+            ],
+          ),
         ),
       ),
     );

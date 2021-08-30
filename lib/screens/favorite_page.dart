@@ -25,14 +25,16 @@ class _FavoritePageState extends State<FavoritePage> {
       automaticallyImplyLeading: false,
       backgroundColor: black,
       elevation: 0,
-      title: Container(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          getTranslated(context, 'favorites'),
-          style: TextStyle(
-            fontSize: 20,
-            color: white,
-            fontWeight: FontWeight.bold,
+      title: SafeArea(
+        child: Container(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            getTranslated(context, 'favorites'),
+            style: TextStyle(
+              fontSize: 20,
+              color: white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

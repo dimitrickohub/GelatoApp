@@ -49,114 +49,116 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget getBody() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        SizedBox(
-          height: 20,
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 10),
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
-          decoration: BoxDecoration(
-            color: Colors.white.withAlpha(20),
-            borderRadius: BorderRadius.all(
-              Radius.circular(20),
-            ),
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            height: 20,
           ),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: TextField(
-                  style: TextStyle(color: white),
-                  decoration: InputDecoration(
-                    hintText: getTranslated(context, 'search'),
-                    hintStyle: TextStyle(
-                      color: primary.withAlpha(120),
-                    ),
-                    border: InputBorder.none,
-                  ),
-                  onChanged: (value) => _runFilter(value),
-                ),
+          Container(
+            margin: EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.white.withAlpha(20),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
               ),
-              Icon(Feather.search, color: primary),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Text(
-            getTranslated(context, 'search_text'),
-            style: TextStyle(
-              fontSize: 20,
-              color: primary,
-              fontWeight: FontWeight.bold,
+            ),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextField(
+                    style: TextStyle(color: white),
+                    decoration: InputDecoration(
+                      hintText: getTranslated(context, 'search'),
+                      hintStyle: TextStyle(
+                        color: primary.withAlpha(120),
+                      ),
+                      border: InputBorder.none,
+                    ),
+                    onChanged: (value) => _runFilter(value),
+                  ),
+                ),
+                Icon(Feather.search, color: primary),
+              ],
             ),
           ),
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        Expanded(
-            child: _foundSongs.length > 0
-                ? ListView.builder(
-                    itemCount: _foundSongs.length,
-                    itemBuilder: (context, index) => Card(
-                          color: primary.withAlpha(120),
-                          elevation: 4,
-                          margin: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          child: ListTile(
-                              leading: ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  minWidth: 50,
-                                  minHeight: 50,
-                                  maxWidth: 50,
-                                  maxHeight: 50,
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: Text(
+              getTranslated(context, 'search_text'),
+              style: TextStyle(
+                fontSize: 20,
+                color: primary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Expanded(
+              child: _foundSongs.length > 0
+                  ? ListView.builder(
+                      itemCount: _foundSongs.length,
+                      itemBuilder: (context, index) => Card(
+                            color: primary.withAlpha(120),
+                            elevation: 4,
+                            margin: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: ListTile(
+                                leading: ConstrainedBox(
+                                  constraints: BoxConstraints(
+                                    minWidth: 50,
+                                    minHeight: 50,
+                                    maxWidth: 50,
+                                    maxHeight: 50,
+                                  ),
+                                  child: Image.asset(songs[index]['img'],
+                                      fit: BoxFit.cover),
                                 ),
-                                child: Image.asset(songs[index]['img'],
-                                    fit: BoxFit.cover),
-                              ),
-                              title: Text(
-                                _foundSongs[index]['description'],
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: white,
-                                  fontWeight: FontWeight.w600,
+                                title: Text(
+                                  _foundSongs[index]['description'],
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              subtitle: Text(
-                                '${_foundSongs[index]['title'].toString()}',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: white,
-                                  fontWeight: FontWeight.w600,
+                                subtitle: Text(
+                                  '${_foundSongs[index]['title'].toString()}',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        alignment: Alignment.bottomCenter,
-                                        child: AlbumPage(
-                                          song: songs[index],
-                                        ),
-                                        type: null));
-                              }),
-                        ))
-                : Text(
-                    getTranslated(context, 'not_found'),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )),
-      ],
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          alignment: Alignment.bottomCenter,
+                                          child: AlbumPage(
+                                            song: songs[index],
+                                          ),
+                                          type: null));
+                                }),
+                          ))
+                  : Text(
+                      getTranslated(context, 'not_found'),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+        ],
+      ),
     );
   }
 }
