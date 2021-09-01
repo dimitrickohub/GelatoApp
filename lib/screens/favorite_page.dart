@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/screens/album_page.dart';
 import 'package:flutter_application_2/songsJson.dart/songs_json.dart';
-import 'package:flutter_application_2/theme/colors.dart';
 import 'package:page_transition/page_transition.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -14,7 +13,6 @@ class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: black,
       appBar: getAppBar(),
       body: getBody(),
     );
@@ -23,7 +21,6 @@ class _FavoritePageState extends State<FavoritePage> {
   Widget getAppBar() {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: black,
       elevation: 0,
       title: SafeArea(
         child: Container(
@@ -32,7 +29,6 @@ class _FavoritePageState extends State<FavoritePage> {
             getTranslated(context, 'favorites'),
             style: TextStyle(
               fontSize: 20,
-              color: white,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -58,7 +54,6 @@ class _FavoritePageState extends State<FavoritePage> {
             songs[index]['description'],
             style: TextStyle(
               fontSize: 16,
-              color: white,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -66,7 +61,6 @@ class _FavoritePageState extends State<FavoritePage> {
             '${songs[index]['title'].toString()}',
             style: TextStyle(
               fontSize: 12,
-              color: white,
               fontWeight: FontWeight.w600,
             ),
           ),
