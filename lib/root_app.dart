@@ -16,7 +16,6 @@ class _RootAppState extends State<RootApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: black,
       bottomNavigationBar: getFooter(),
       body: getBody(),
     );
@@ -42,7 +41,7 @@ class _RootAppState extends State<RootApp> {
     return Container(
         alignment: Alignment.center,
         height: 70,
-        decoration: BoxDecoration(color: black),
+        decoration: BoxDecoration(),
         child: Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Row(
@@ -52,7 +51,7 @@ class _RootAppState extends State<RootApp> {
                   return IconButton(
                       icon: Icon(
                         items[index],
-                        color: activeTab == index ? primary : white,
+                        color: activeTab == index ? primary : grey,
                       ),
                       onPressed: () {
                         setState(() {

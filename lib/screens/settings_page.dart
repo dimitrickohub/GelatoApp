@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/classes/language.dart';
 import 'package:flutter_application_2/classes/sharedpref.dart';
+import 'package:flutter_application_2/config.dart';
 
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/my_app.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_application_2/screens/regisration_page.dart';
 import 'package:flutter_application_2/sevices/auth.dart';
 
 import 'package:flutter_application_2/theme/colors.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fullscreen/fullscreen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,7 +55,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget getAppBar() {
     return AppBar(
-      backgroundColor: black,
       elevation: 0,
       title: Container(
         alignment: Alignment.centerLeft,
@@ -61,17 +62,28 @@ class _SettingsPageState extends State<SettingsPage> {
           getTranslated(context, 'settings'),
           style: TextStyle(
             fontSize: 20,
-            color: white,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
+      actions: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(right: 20),
+          child: IconButton(
+              onPressed: () {
+                currentTheme.switchTheme();
+              },
+              icon: Icon(
+                Feather.moon,
+                color: white,
+              )),
+        )
+      ],
     );
   }
 
   Widget getBody() {
     return Scaffold(
-      backgroundColor: black,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -100,13 +112,11 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Text(
                   _email,
-                  style: TextStyle(
-                      color: white, fontWeight: FontWeight.w600, fontSize: 15),
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                 ),
                 Text(
                   getTranslated(context, 'my_profile'),
-                  style: TextStyle(
-                      color: white, fontWeight: FontWeight.w600, fontSize: 12),
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
                 ),
               ],
             ),
@@ -123,8 +133,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 iconEnabledColor: primary,
                 hint: Text(
                   getTranslated(context, 'change_language'),
-                  style: TextStyle(
-                      color: white, fontWeight: FontWeight.w600, fontSize: 15),
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                 ),
                 onChanged: (Language language) {
                   _changeLanguage(language);
@@ -140,7 +149,6 @@ class _SettingsPageState extends State<SettingsPage> {
                               e.flag,
                               style: TextStyle(
                                 fontSize: 15,
-                                color: white,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -166,8 +174,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               child: Text(
                 getTranslated(context, 'log_out'),
-                style: TextStyle(
-                    color: white, fontWeight: FontWeight.w600, fontSize: 18),
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
               ),
               onPressed: () {
                 SaveData.remove();

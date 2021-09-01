@@ -43,7 +43,6 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: black,
       body: getBody(),
     );
   }
@@ -69,7 +68,6 @@ class _SearchPageState extends State<SearchPage> {
               children: <Widget>[
                 Expanded(
                   child: TextField(
-                    style: TextStyle(color: white),
                     decoration: InputDecoration(
                       hintText: getTranslated(context, 'search'),
                       hintStyle: TextStyle(
@@ -125,7 +123,6 @@ class _SearchPageState extends State<SearchPage> {
                                   _foundSongs[index]['description'],
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: white,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -133,7 +130,6 @@ class _SearchPageState extends State<SearchPage> {
                                   '${_foundSongs[index]['title'].toString()}',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: white,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),

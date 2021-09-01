@@ -37,7 +37,6 @@ class _AlbumPageState extends State<AlbumPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: black,
       body: getBody(),
     );
   }
@@ -68,9 +67,9 @@ class _AlbumPageState extends State<AlbumPage> {
                 children: [
                   Text(widget.song['title'],
                       style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: white)),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )),
                   Container(
                     // decoration: BoxDecoration(
                     //     color: grey, borderRadius: BorderRadius.circular(5)),
@@ -82,7 +81,6 @@ class _AlbumPageState extends State<AlbumPage> {
                           _isSub
                               ? getTranslated(context, 'subscription')
                               : getTranslated(context, 'subscribe'),
-                          style: TextStyle(color: white),
                         ),
                         style: ButtonStyle(
                           backgroundColor:
@@ -163,7 +161,6 @@ class _AlbumPageState extends State<AlbumPage> {
                             Text(songs[index]['title'],
                                 style: TextStyle(
                                   fontSize: 15,
-                                  color: white,
                                   fontWeight: FontWeight.w600,
                                 )),
                             SizedBox(
@@ -229,7 +226,6 @@ class _AlbumPageState extends State<AlbumPage> {
                         width: (size.width - 60) * 0.77,
                         child: Text(
                           "${index + 1}" + songAlbums[index]['title'],
-                          style: TextStyle(color: white),
                         ),
                       ),
                       Container(
@@ -252,7 +248,6 @@ class _AlbumPageState extends State<AlbumPage> {
                                 child: Center(
                                   child: Icon(
                                     Icons.play_arrow,
-                                    color: white,
                                     size: 16,
                                   ),
                                 ),
@@ -273,7 +268,6 @@ class _AlbumPageState extends State<AlbumPage> {
               IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,
-                  color: white,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -282,7 +276,6 @@ class _AlbumPageState extends State<AlbumPage> {
               IconButton(
                 icon: Icon(
                   Feather.more_vertical,
-                  color: white,
                 ),
                 onPressed: () {
                   Navigator.pop(context);

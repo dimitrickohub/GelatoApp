@@ -18,7 +18,6 @@ class _HomePageState extends State<HomePage> {
   int activeMenu2 = 2;
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: black,
       appBar: getAppBar(),
       body: getBody(),
     );
@@ -27,7 +26,6 @@ class _HomePageState extends State<HomePage> {
   Widget getAppBar() {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: black,
       elevation: 0,
       title: SafeArea(
         child: Padding(
@@ -157,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                               Text(songs[index]['title'],
                                   style: TextStyle(
                                     fontSize: 15,
-                                    color: white,
+                                    // color: white,
                                     fontWeight: FontWeight.w600,
                                   )),
                               SizedBox(
@@ -277,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                               Text(songs[index + 5]['title'],
                                   style: TextStyle(
                                     fontSize: 15,
-                                    color: white,
+                                    // color: white,
                                     fontWeight: FontWeight.w600,
                                   )),
                               SizedBox(

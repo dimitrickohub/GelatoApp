@@ -65,7 +65,6 @@ class _MusicDataState extends State<MusicData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: black,
       appBar: getAppBar(),
       body: getBody(),
     );
@@ -73,13 +72,11 @@ class _MusicDataState extends State<MusicData> {
 
   Widget getAppBar() {
     return AppBar(
-      backgroundColor: black,
       elevation: 0,
       actions: [
         IconButton(
           icon: Icon(
             Feather.more_vertical,
-            color: white,
           ),
           onPressed: null,
         ),
@@ -139,16 +136,13 @@ class _MusicDataState extends State<MusicData> {
                 children: [
                   Icon(
                     AntDesign.addfolder,
-                    color: white,
                   ),
                   Column(
                     children: [
                       Text(
                         widget.title,
                         style: TextStyle(
-                            fontSize: 18,
-                            color: white,
-                            fontWeight: FontWeight.bold),
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Container(
                         width: 150,
@@ -157,14 +151,13 @@ class _MusicDataState extends State<MusicData> {
                           maxLines: 1,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 15, color: white.withOpacity(0.5)),
+                              fontSize: 15, color: grey.withOpacity(0.5)),
                         ),
                       )
                     ],
                   ),
                   Icon(
                     Feather.more_vertical,
-                    color: white,
                   ),
                 ],
               ),
@@ -221,7 +214,7 @@ class _MusicDataState extends State<MusicData> {
                 IconButton(
                   icon: Icon(
                     Feather.skip_back,
-                    color: white.withOpacity(0.8),
+                    // color: white.withOpacity(0.8),
                     size: 25,
                   ),
                   onPressed: () {
@@ -244,7 +237,6 @@ class _MusicDataState extends State<MusicData> {
                               ? Entypo.controller_stop
                               : Entypo.controller_play,
                           size: 28,
-                          color: white,
                         ),
                       ),
                     ),
@@ -265,10 +257,10 @@ class _MusicDataState extends State<MusicData> {
                     iconSize: 50,
                     icon: Icon(
                       Feather.skip_forward,
-                      color: white.withOpacity(0.8),
+                      // color: white.withOpacity(0.8),
                       size: 25,
                     ),
-                    onPressed: null),
+                    onPressed: () {}),
                 // IconButton(
                 //     icon: Icon(
                 //       AntDesign.retweet,
