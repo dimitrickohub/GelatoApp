@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/classes/language.dart';
 import 'package:flutter_application_2/classes/sharedpref.dart';
@@ -9,10 +12,11 @@ import 'package:flutter_application_2/screens/regisration_page.dart';
 import 'package:flutter_application_2/sevices/auth.dart';
 
 import 'package:flutter_application_2/theme/colors.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+
 import 'package:fullscreen/fullscreen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -20,11 +24,9 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  String _email;
-
-  void enterFullScreen(FullScreenMode fullScreenMode) async {
-    await FullScreen.enterFullScreen(fullScreenMode);
-  }
+  String? _email;
+  bool _isTap = false;
+  late var imagePicker;
 
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
@@ -33,8 +35,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   void initState() {
-    getInstance();
     super.initState();
+    getInstance();
+    imagePicker = new ImagePicker();
   }
 
   void getInstance() async {
@@ -44,11 +47,21 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
+  XFile? image;
+  var _image;
+  _imgFromGallery() async {
+    image = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = File(image!.path);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: black,
-      appBar: getAppBar(),
+      appBar: getAppBar() as PreferredSizeWidget?,
       body: getBody(),
     );
   }
@@ -59,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
       title: Container(
         alignment: Alignment.centerLeft,
         child: Text(
-          getTranslated(context, 'settings'),
+          getTranslated(context, 'settings')!,
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -71,10 +84,18 @@ class _SettingsPageState extends State<SettingsPage> {
           padding: EdgeInsets.only(right: 20),
           child: IconButton(
               onPressed: () {
+                if (_isTap) {
+                  setState(() {
+                    _isTap = false;
+                  });
+                } else
+                  setState(() {
+                    _isTap = true;
+                  });
                 currentTheme.switchTheme();
               },
               icon: Icon(
-                Feather.moon,
+                _isTap ? CupertinoIcons.moon : CupertinoIcons.sun_max,
                 color: white,
               )),
         )
@@ -100,8 +121,17 @@ class _SettingsPageState extends State<SettingsPage> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                    image: AssetImage('assets/images/profile.png'),
+                    image: (_image != null
+                            ? FileImage(_image)
+                            : AssetImage('assets/images/profile.png'))
+                        as ImageProvider<Object>,
                     fit: BoxFit.fill),
+              ),
+              child: TextButton(
+                onPressed: () async {
+                  _imgFromGallery();
+                },
+                child: Text(''),
               ),
             ),
             SizedBox(
@@ -111,11 +141,11 @@ class _SettingsPageState extends State<SettingsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  _email,
+                  _email.toString(),
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                 ),
                 Text(
-                  getTranslated(context, 'my_profile'),
+                  getTranslated(context, 'my_profile')!,
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
                 ),
               ],
@@ -132,11 +162,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 iconSize: 30,
                 iconEnabledColor: primary,
                 hint: Text(
-                  getTranslated(context, 'change_language'),
+                  getTranslated(context, 'change_language')!,
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                 ),
-                onChanged: (Language language) {
-                  _changeLanguage(language);
+                onChanged: (Language? language) {
+                  _changeLanguage(language!);
                 },
                 items: Language.languageList()
                     .map<DropdownMenuItem<Language>>(
@@ -145,14 +175,29 @@ class _SettingsPageState extends State<SettingsPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
-                              e.flag,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                                color: grey,
+                              ),
+                              child: Container(
+                                child: Text(
+                                  e.flag,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ),
-                            Text(e.name)
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(e.name,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                )),
                           ],
                         ),
                       ),
@@ -173,7 +218,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     borderRadius: BorderRadius.circular(20)),
               ),
               child: Text(
-                getTranslated(context, 'log_out'),
+                getTranslated(context, 'log_out')!,
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
               ),
               onPressed: () {

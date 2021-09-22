@@ -16,7 +16,7 @@ const List song_type_2 = [
   "Discover",
   "Concerts",
 ];
-const List songs = [
+const List song = [
   {
     "img": "assets/album_img/img_1.jpg",
     "title": "I love You",

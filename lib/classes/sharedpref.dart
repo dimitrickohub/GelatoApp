@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer' as developer;
 
 class SaveData {
-  static SharedPreferences localStorage;
+  static late SharedPreferences localStorage;
 
   static saveLoginPass(String email, String password) async {
     localStorage = await SharedPreferences.getInstance();
@@ -19,7 +19,7 @@ class SaveData {
 
   static getInstance() async {
     localStorage = await SharedPreferences.getInstance();
-    String emailSP = localStorage.getString('email');
+    String emailSP = localStorage.getString('email')!;
     developer.log('SP ' + emailSP);
     return emailSP;
   }

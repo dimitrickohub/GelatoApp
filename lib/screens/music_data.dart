@@ -1,17 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/theme/colors.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+
 import 'package:audioplayers/audioplayers.dart';
 
 class MusicData extends StatefulWidget {
-  final String title;
-  final String description;
-  final Color color;
-  final String img;
-  final String songUrl;
+  final String? title;
+  final String? description;
+  final Color? color;
+  final String? img;
+  final String? songUrl;
 
   const MusicData(
-      {Key key,
+      {Key? key,
       this.title,
       this.description,
       this.color,
@@ -25,8 +26,8 @@ class MusicData extends StatefulWidget {
 class _MusicDataState extends State<MusicData> {
   double _currentSliderValue = 10;
 
-  AudioPlayer advancedPlayer;
-  AudioCache audioCache;
+  AudioPlayer? advancedPlayer;
+  AudioCache? audioCache;
   bool isPlaying = true;
   @override
   void initState() {
@@ -41,19 +42,19 @@ class _MusicDataState extends State<MusicData> {
   }
 
   playSound(remoteUrl) async {
-    await advancedPlayer.play(remoteUrl);
+    await advancedPlayer?.play(remoteUrl);
   }
 
   stopSound(remoteUrl) async {
     // Uri audioFile = await audioCache.load(remoteUrl);
     // await advancedPlayer.setUrl(audioFile.path);
-    advancedPlayer.pause();
+    advancedPlayer?.pause();
   }
 
   seekSound() async {
     // Uri audioFile = audioCache.load(widget.songUrl);
     // await advancedPlayer.setUrl(audioFile.path);
-    advancedPlayer.seek(Duration(milliseconds: 1200));
+    advancedPlayer?.seek(Duration(milliseconds: 1200));
   }
 
   @override
@@ -65,7 +66,8 @@ class _MusicDataState extends State<MusicData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(100), child: getAppBar()),
       body: getBody(),
     );
   }
@@ -76,9 +78,9 @@ class _MusicDataState extends State<MusicData> {
       actions: [
         IconButton(
           icon: Icon(
-            Feather.more_vertical,
+            CupertinoIcons.ellipsis_vertical,
           ),
-          onPressed: null,
+          onPressed: () {},
         ),
       ],
     );
@@ -99,7 +101,7 @@ class _MusicDataState extends State<MusicData> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: widget.color,
+                        color: grey,
                         blurRadius: 50,
                         spreadRadius: 5,
                         offset: Offset(-10, 40),
@@ -116,7 +118,8 @@ class _MusicDataState extends State<MusicData> {
                   height: size.width - 60,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(widget.img), fit: BoxFit.cover),
+                        image: NetworkImage(widget.img.toString()),
+                        fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
@@ -135,19 +138,19 @@ class _MusicDataState extends State<MusicData> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(
-                    AntDesign.addfolder,
+                    CupertinoIcons.folder,
                   ),
                   Column(
                     children: [
                       Text(
-                        widget.title,
+                        widget.title.toString(),
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Container(
                         width: 150,
                         child: Text(
-                          widget.description,
+                          widget.description.toString(),
                           maxLines: 1,
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -157,7 +160,7 @@ class _MusicDataState extends State<MusicData> {
                     ],
                   ),
                   Icon(
-                    Feather.more_vertical,
+                    CupertinoIcons.ellipsis_vertical,
                   ),
                 ],
               ),
@@ -213,7 +216,8 @@ class _MusicDataState extends State<MusicData> {
                 //     onPressed: null),
                 IconButton(
                   icon: Icon(
-                    Feather.skip_back,
+                    CupertinoIcons.back,
+                    // Feather.skip_back,
                     // color: white.withOpacity(0.8),
                     size: 25,
                   ),
@@ -233,9 +237,7 @@ class _MusicDataState extends State<MusicData> {
                           BoxDecoration(shape: BoxShape.circle, color: primary),
                       child: Center(
                         child: Icon(
-                          isPlaying
-                              ? Entypo.controller_stop
-                              : Entypo.controller_play,
+                          isPlaying ? CupertinoIcons.stop : CupertinoIcons.play,
                           size: 28,
                         ),
                       ),
@@ -256,7 +258,8 @@ class _MusicDataState extends State<MusicData> {
                 IconButton(
                     iconSize: 50,
                     icon: Icon(
-                      Feather.skip_forward,
+                      CupertinoIcons.forward,
+                      // Feather.skip_forward,
                       // color: white.withOpacity(0.8),
                       size: 25,
                     ),
@@ -278,7 +281,7 @@ class _MusicDataState extends State<MusicData> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                Feather.tv,
+                CupertinoIcons.tv,
                 color: primary,
                 size: 20,
               ),

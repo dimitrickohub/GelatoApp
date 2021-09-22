@@ -7,11 +7,11 @@ class Localization {
   Localization(this.locale);
 
   final Locale locale;
-  static Localization of(BuildContext context) {
+  static Localization? of(BuildContext context) {
     return Localizations.of<Localization>(context, Localization);
   }
 
-  Map<String, String> _localizedValues;
+  late Map<String, String> _localizedValues;
 
   Future<void> load() async {
     String jsonStringValues =
@@ -21,7 +21,7 @@ class Localization {
         mappedJson.map((key, value) => MapEntry(key, value.toString()));
   }
 
-  String translate(String key) {
+  String? translate(String key) {
     return _localizedValues[key];
   }
 

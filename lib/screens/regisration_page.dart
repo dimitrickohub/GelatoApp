@@ -1,5 +1,6 @@
 import 'dart:developer' as developer;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/classes/sharedpref.dart';
 import 'package:flutter_application_2/domain/user.dart';
@@ -10,14 +11,13 @@ import 'package:flutter_application_2/screens/sign_up_page.dart';
 import 'package:flutter_application_2/sevices/auth.dart';
 
 import 'package:flutter_application_2/theme/colors.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -30,8 +30,8 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  String _email;
-  String _password;
+  late String _email;
+  late String _password;
 
   AuthService _authService = AuthService();
 
@@ -70,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     alignment: Alignment.center,
                     padding: EdgeInsets.all(10),
                     child: Text(
-                      getTranslated(context, 'welcome_back'),
+                      getTranslated(context, 'welcome_back')!,
                       style: TextStyle(
                           color: grey,
                           fontWeight: FontWeight.w600,
@@ -91,7 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Row(
                     children: <Widget>[
                       Icon(
-                        Feather.user,
+                        CupertinoIcons.person,
                         color: primary,
                       ),
                       SizedBox(
@@ -128,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Row(
                     children: <Widget>[
                       Icon(
-                        Feather.lock,
+                        CupertinoIcons.lock,
                         color: primary,
                       ),
                       SizedBox(
@@ -166,7 +166,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   borderRadius: BorderRadius.circular(10)),
                             ),
                             child: Text(
-                              getTranslated(context, 'sign_in'),
+                              getTranslated(context, 'sign_in')!,
                               style: TextStyle(
                                   color: white,
                                   fontWeight: FontWeight.w600,
@@ -190,7 +190,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Row(
                   children: <Widget>[
                     Text(
-                      getTranslated(context, 'sign_up_text'),
+                      getTranslated(context, 'sign_up_text')!,
                       style: TextStyle(
                           color: grey,
                           fontWeight: FontWeight.w600,
@@ -198,7 +198,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     TextButton(
                       child: Text(
-                        getTranslated(context, 'sign_up'),
+                        getTranslated(context, 'sign_up')!,
                         style: TextStyle(
                             color: primary,
                             fontWeight: FontWeight.w600,
@@ -235,7 +235,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if (_email.isEmpty || _password.isEmpty) return;
 
-    Userdom user = await _authService.singInWithEmailAndPassword(
+    Userdom? user = await _authService.singInWithEmailAndPassword(
         _email.trim(), _password.trim());
     if (user == null) {
       Fluttertoast.showToast(
@@ -251,7 +251,7 @@ class _RegisterPageState extends State<RegisterPage> {
       _passwordController.clear();
       _pageTransition();
 
-      developer.log(SaveData.localStorage.getString('email'));
+      developer.log(SaveData.localStorage.getString('email')!);
     }
   }
 }

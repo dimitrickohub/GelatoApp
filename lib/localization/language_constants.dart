@@ -23,14 +23,18 @@ Future<Locale> getLocale() async {
 
 // ignore: missing_return
 Locale _locale(String languageCode) {
-  switch (languageCode) {
-    case ENGLISH:
-      return Locale(ENGLISH, 'US');
-    case RUSSIAN:
-      return Locale(RUSSIAN, "RU");
-  }
+  if (languageCode == ENGLISH)
+    return Locale(ENGLISH, 'US');
+  else
+    return Locale(RUSSIAN, "RU");
+  // switch (languageCode) {
+  //   case ENGLISH:
+  //     return Locale(ENGLISH, 'US');
+  //   case RUSSIAN:
+  //     return Locale(RUSSIAN, "RU");
+  // }
 }
 
-String getTranslated(BuildContext context, String key) {
-  return Localization.of(context).translate(key);
+String? getTranslated(BuildContext context, String key) {
+  return Localization.of(context)!.translate(key);
 }
