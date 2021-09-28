@@ -97,7 +97,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             controller: _emailController,
                             style: TextStyle(color: white),
                             decoration: InputDecoration(
-                              hintText: "User name",
+                              hintText: 'User name',
                               hintStyle: TextStyle(
                                 color: primary.withAlpha(120),
                               ),
@@ -135,7 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             controller: _passwordController,
                             style: TextStyle(color: white),
                             decoration: InputDecoration(
-                              hintText: "Passwords",
+                              hintText: 'Passwords',
                               hintStyle: TextStyle(
                                 color: primary.withAlpha(120),
                               ),
@@ -173,7 +173,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             controller: _passwordController2,
                             style: TextStyle(color: white),
                             decoration: InputDecoration(
-                              hintText: "Confirm the password",
+                              hintText: 'Confirm the password',
                               hintStyle: TextStyle(
                                 color: primary.withAlpha(120),
                               ),
@@ -212,7 +212,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 setState(() => _loading = true);
                               } else
                                 Fluttertoast.showToast(
-                                    msg: "Password mismatch",
+                                    msg: 'Password mismatch',
                                     toastLength: Toast.LENGTH_LONG,
                                     gravity: ToastGravity.TOP,
                                     timeInSecForIosWeb: 3,
@@ -252,7 +252,7 @@ class _SignUpPageState extends State<SignUpPage> {
         _email.trim(), _password.trim());
     if (user == null) {
       Fluttertoast.showToast(
-          msg: "Can't Sign-Up you, please check your email and password",
+          msg: 'Can not Sign-Up you, please check your email and password',
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.TOP,
           timeInSecForIosWeb: 3,

@@ -238,7 +238,7 @@ class _MusicDataState extends State<MusicData> {
               Padding(
                 padding: const EdgeInsets.only(top: 3),
                 child: Text(
-                  "Chromecast is ready",
+                  'Chromecast is ready',
                   style: TextStyle(
                     color: primary,
                   ),

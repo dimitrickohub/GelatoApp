@@ -24,7 +24,7 @@ class AlbumPage extends StatefulWidget {
 }
 
 class _AlbumPageState extends State<AlbumPage> {
-  bool _isSub = false;
+  bool _isSub = true;
 
   List<FavoriteList>? music;
 
@@ -43,24 +43,20 @@ class _AlbumPageState extends State<AlbumPage> {
     prefs.setString('favList', encodedData);
   }
 
-  void _toggleFavorite() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    setState(() {
-      if (_isSub) {
-        _isSub = false;
-        prefs.setBool('_isSub', _isSub);
-      } else {
-        _isSub = true;
-        prefs.setBool('_isSub', _isSub);
-      }
-    });
-  }
+  // void _toggleFavorite() {
+  //   setState(() {
+  //     if (_isSub) {
+  //       _isSub = false;
+  //     } else {
+  //       _isSub = true;
+  //     }
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
-    _toggleFavorite();
+
     _saveFavorites();
   }
 
@@ -143,7 +139,11 @@ class _AlbumPageState extends State<AlbumPage> {
                                       ),
                                     ),
                                     onPressed: () async {
-                                      _toggleFavorite();
+                                      setState(() {
+                                        if (_isSub) _isSub = false;
+                                      });
+                                      // _toggleFavorite();
+
                                       _saveFavorites();
                                     }),
                               ),
@@ -279,7 +279,7 @@ class _AlbumPageState extends State<AlbumPage> {
                                   Container(
                                     width: (size.width - 60) * 0.77,
                                     child: Text(
-                                      "${index + 1}" +
+                                      '${index + 1}' +
                                           songs.result![index].songs![index]
                                               .title
                                               .toString(),

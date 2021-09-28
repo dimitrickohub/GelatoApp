@@ -9,6 +9,7 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Userdom user = Provider.of<Userdom>(context);
+    // ignore: unnecessary_null_comparison
     final bool isSignIn = user != null;
 
     return isSignIn ? RootApp() : RegisterPage();

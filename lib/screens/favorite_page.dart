@@ -14,6 +14,7 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   List<FavoriteList>? songs;
+  List<FavoriteList>? songlist;
   String? songsString;
   Future _fetchSongs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -22,8 +23,13 @@ class _FavoritePageState extends State<FavoritePage> {
 
       songs = FavoriteList.decode(songsString.toString());
     });
-
+    _addSongs();
     return songs;
+  }
+
+  Future _addSongs() async {
+    songlist!.add(songs!.last);
+    return songlist;
   }
 
   @override
@@ -62,9 +68,11 @@ class _FavoritePageState extends State<FavoritePage> {
   Widget getBody() {
     return FutureBuilder(
       builder: (context, AsyncSnapshot snapshot) {
+        // ignore: unnecessary_null_comparison
         if (ConnectionState.active != null && !snapshot.hasData) {
           return Center(child: CircularProgressIndicator());
         }
+        // ignore: unnecessary_null_comparison
         if (ConnectionState.done != null && snapshot.hasError) {
           return Center(child: Text(snapshot.error.toString()));
         }
@@ -98,8 +106,8 @@ class _FavoritePageState extends State<FavoritePage> {
                         height: 90,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image:
-                                    NetworkImage(songs![index].img.toString()),
+                                image: NetworkImage(
+                                    songlist![index].img.toString()),
                                 fit: BoxFit.contain)),
                       ),
                       Expanded(
@@ -108,7 +116,7 @@ class _FavoritePageState extends State<FavoritePage> {
                           child: Column(
                             children: <Widget>[
                               Text(
-                                songs![index].title.toString(),
+                                songlist![index].title.toString(),
                                 style: TextStyle(
                                   fontSize: 25,
                                   fontWeight: FontWeight.w600,
@@ -120,7 +128,7 @@ class _FavoritePageState extends State<FavoritePage> {
                               Expanded(
                                   child: Container(
                                       child: Text(
-                                songs![index].description.toString(),
+                                songlist![index].description.toString(),
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
@@ -137,47 +145,6 @@ class _FavoritePageState extends State<FavoritePage> {
             );
           },
         );
-        // return ListView.builder(
-        //   itemCount: snapshot.data!.length,
-        //   itemBuilder: (context, index) => ListTile(
-        //       leading: ConstrainedBox(
-        //         constraints: BoxConstraints(
-        //           minWidth: 50,
-        //           minHeight: 50,
-        //           maxWidth: 50,
-        //           maxHeight: 50,
-        //         ),
-        //         child: Image.network(songs![index].img.toString(),
-        //             fit: BoxFit.cover),
-        //       ),
-        //       title: Text(
-        //         songs![index].description.toString(),
-        //         style: TextStyle(
-        //           fontSize: 16,
-        //           fontWeight: FontWeight.w600,
-        //         ),
-        //       ),
-        //       subtitle: Text(
-        //         '${songs![index].title.toString()}',
-        //         style: TextStyle(
-        //           fontSize: 12,
-        //           fontWeight: FontWeight.w600,
-        //         ),
-        //       ),
-        //       onTap: () {
-        //         Navigator.push(
-        //             context,
-        //             PageTransition(
-        //                 alignment: Alignment.bottomCenter,
-        //                 child: MusicData(
-        //                   title: songs![index].title.toString(),
-        //                   description: songs![index].description.toString(),
-        //                   img: songs![index].img.toString(),
-        //                   songUrl: songs![index].songUrl.toString(),
-        //                 ),
-        //                 type: PageTransitionType.scale));
-        //       }),
-        // );
       },
       future: _fetchSongs(),
     );

@@ -234,7 +234,7 @@ class _RegisterPageState extends State<RegisterPage> {
         _email.trim(), _password.trim());
     if (user == null) {
       Fluttertoast.showToast(
-          msg: "Can't Sign-In you, please check your email and password",
+          msg: 'Can not Sign-In you, please check your email and password',
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.TOP,
           timeInSecForIosWeb: 3,
