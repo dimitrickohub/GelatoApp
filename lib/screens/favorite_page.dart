@@ -70,31 +70,9 @@ class _FavoritePageState extends State<FavoritePage> {
         }
         return ListView.builder(
           itemCount: snapshot.data!.length,
-          itemBuilder: (context, index) => ListTile(
-              leading: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: 50,
-                  minHeight: 50,
-                  maxWidth: 50,
-                  maxHeight: 50,
-                ),
-                child: Image.network(songs![index].img.toString(),
-                    fit: BoxFit.cover),
-              ),
-              title: Text(
-                songs![index].description.toString(),
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              subtitle: Text(
-                '${songs![index].title.toString()}',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+          padding: EdgeInsets.all(8),
+          itemBuilder: (context, index) {
+            return GestureDetector(
               onTap: () {
                 Navigator.push(
                     context,
@@ -107,8 +85,99 @@ class _FavoritePageState extends State<FavoritePage> {
                           songUrl: songs![index].songUrl.toString(),
                         ),
                         type: PageTransitionType.scale));
-              }),
+              },
+              child: Card(
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        width: 90,
+                        height: 90,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                    NetworkImage(songs![index].img.toString()),
+                                fit: BoxFit.contain)),
+                      ),
+                      Expanded(
+                        child: Container(
+                          height: 60,
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                songs![index].title.toString(),
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Expanded(
+                                  child: Container(
+                                      child: Text(
+                                songs![index].description.toString(),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ))),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
         );
+        // return ListView.builder(
+        //   itemCount: snapshot.data!.length,
+        //   itemBuilder: (context, index) => ListTile(
+        //       leading: ConstrainedBox(
+        //         constraints: BoxConstraints(
+        //           minWidth: 50,
+        //           minHeight: 50,
+        //           maxWidth: 50,
+        //           maxHeight: 50,
+        //         ),
+        //         child: Image.network(songs![index].img.toString(),
+        //             fit: BoxFit.cover),
+        //       ),
+        //       title: Text(
+        //         songs![index].description.toString(),
+        //         style: TextStyle(
+        //           fontSize: 16,
+        //           fontWeight: FontWeight.w600,
+        //         ),
+        //       ),
+        //       subtitle: Text(
+        //         '${songs![index].title.toString()}',
+        //         style: TextStyle(
+        //           fontSize: 12,
+        //           fontWeight: FontWeight.w600,
+        //         ),
+        //       ),
+        //       onTap: () {
+        //         Navigator.push(
+        //             context,
+        //             PageTransition(
+        //                 alignment: Alignment.bottomCenter,
+        //                 child: MusicData(
+        //                   title: songs![index].title.toString(),
+        //                   description: songs![index].description.toString(),
+        //                   img: songs![index].img.toString(),
+        //                   songUrl: songs![index].songUrl.toString(),
+        //                 ),
+        //                 type: PageTransitionType.scale));
+        //       }),
+        // );
       },
       future: _fetchSongs(),
     );

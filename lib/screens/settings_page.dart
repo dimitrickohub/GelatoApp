@@ -13,7 +13,6 @@ import 'package:flutter_application_2/sevices/auth.dart';
 
 import 'package:flutter_application_2/theme/colors.dart';
 
-import 'package:fullscreen/fullscreen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';

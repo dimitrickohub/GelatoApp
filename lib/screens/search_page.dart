@@ -155,6 +155,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
+  // ignore: unused_field
   dynamic _foundSongs = [];
 
   @override

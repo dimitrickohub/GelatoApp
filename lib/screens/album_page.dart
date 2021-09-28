@@ -88,6 +88,8 @@ class _AlbumPageState extends State<AlbumPage> {
 
             var size = MediaQuery.of(context).size;
             final songs = snapshot.data!.body!;
+            // ignore: unused_local_variable
+            int index = 0;
 
             return LayoutBuilder(builder:
                 (BuildContext context, BoxConstraints viewportConstraints) {
@@ -248,76 +250,76 @@ class _AlbumPageState extends State<AlbumPage> {
                         SizedBox(
                           height: 30,
                         ),
-                        // Column(
-                        //     children:
-                        //         List.generate(songs.result!.length, (index) {
-                        //   return Padding(
-                        //     padding: const EdgeInsets.only(
-                        //         left: 30, right: 30, bottom: 10),
-                        //     child: GestureDetector(
-                        //       onTap: () {
-                        //         Navigator.push(
-                        //             context,
-                        //             PageTransition(
-                        //                 alignment: Alignment.bottomCenter,
-                        //                 child: MusicData(
-                        //                   title: songs.result![index].title
-                        //                       .toString(),
-                        //                   color: grey,
-                        //                   description: songs
-                        //                       .result![index].description
-                        //                       .toString(),
-                        //                   img: songs.result![index].img,
-                        //                   songUrl: songs.result![index].songUrl
-                        //                       .toString(),
-                        //                 ),
-                        //                 type: PageTransitionType.scale));
-                        //       },
-                        //       // child: Row(
-                        //       //   children: [
-                        //       //     Container(
-                        //       //       width: (size.width - 60) * 0.77,
-                        //       //       child: Text(
-                        //       //         "${index + 1}" +
-                        //       //             songs.result![index].songs![index].title
-                        //       //                 .toString(),
-                        //       //       ),
-                        //       //     ),
-                        //       //     Container(
-                        //       //         width: (size.width - 60) * 0.23,
-                        //       //         height: 50,
-                        //       //         child: Row(
-                        //       //           mainAxisAlignment:
-                        //       //               MainAxisAlignment.spaceBetween,
-                        //       //           children: [
-                        //       //             Text(
-                        //       //               songs.result![index].songs![index]
-                        //       //                   .duration
-                        //       //                   .toString(),
-                        //       //               style: TextStyle(
-                        //       //                   color: grey, fontSize: 14),
-                        //       //             ),
-                        //       //             Container(
-                        //       //               width: 25,
-                        //       //               height: 25,
-                        //       //               decoration: BoxDecoration(
-                        //       //                 shape: BoxShape.circle,
-                        //       //                 color: grey.withOpacity(0.8),
-                        //       //               ),
-                        //       //               child: Center(
-                        //       //                 child: Icon(
-                        //       //                   Icons.play_arrow,
-                        //       //                   size: 16,
-                        //       //                 ),
-                        //       //               ),
-                        //       //             )
-                        //       //           ],
-                        //       //         )),
-                        //       //   ],
-                        //       // ),
-                        //     ),
-                        //   );
-                        // }))
+                        Column(
+                            children: List.generate(
+                                songs.result!.last.songs!.length, (index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                                left: 30, right: 30, bottom: 10),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        alignment: Alignment.bottomCenter,
+                                        child: MusicData(
+                                          title: songs.result![index].title
+                                              .toString(),
+                                          description: songs
+                                              .result![index].description
+                                              .toString(),
+                                          img: songs.result![index].img,
+                                          songUrl: songs.result![index].songUrl
+                                              .toString(),
+                                        ),
+                                        type: PageTransitionType.scale));
+                              },
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: (size.width - 60) * 0.77,
+                                    child: Text(
+                                      "${index + 1}" +
+                                          songs.result![index].songs![index]
+                                              .title
+                                              .toString(),
+                                    ),
+                                  ),
+                                  Container(
+                                      width: (size.width - 60) * 0.23,
+                                      height: 50,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            songs.result![index].songs![index]
+                                                .duration
+                                                .toString(),
+                                            style: TextStyle(
+                                                color: grey, fontSize: 14),
+                                          ),
+                                          Container(
+                                            width: 25,
+                                            height: 25,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: grey.withOpacity(0.8),
+                                            ),
+                                            child: Center(
+                                              child: Icon(
+                                                Icons.play_arrow,
+                                                size: 16,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      )),
+                                ],
+                              ),
+                            ),
+                          );
+                        }))
                       ],
                     ),
                     SafeArea(
