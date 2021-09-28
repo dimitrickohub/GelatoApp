@@ -185,7 +185,6 @@ class _HomePageState extends State<HomePage> {
                                               .toString(),
                                           style: TextStyle(
                                             fontSize: 15,
-                                            // color: white,
                                             fontWeight: FontWeight.w600,
                                           )),
                                       SizedBox(

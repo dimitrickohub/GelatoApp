@@ -27,11 +27,8 @@ class MyLightTheme {
         onSecondary: white,
         error: Colors.red.shade400);
 
-    var t =
-        ThemeData.from(textTheme: txtTheme, colorScheme: colorScheme).copyWith(
-            // buttonColor: accent1,
-            highlightColor: accent1,
-            toggleableActiveColor: accent1);
+    var t = ThemeData.from(textTheme: txtTheme, colorScheme: colorScheme)
+        .copyWith(highlightColor: accent1, toggleableActiveColor: accent1);
 
     return t;
   }

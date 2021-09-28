@@ -48,7 +48,7 @@ class _TestPageState extends State<TestPage> {
               ),
             );
           }
-          // if (snapshot.data != null )
+
           final songs = snapshot.data!.body!;
 
           return ListView.builder(
@@ -133,49 +133,3 @@ Widget getAppBar() {
     ),
   );
 }
-
-
-  // Widget getBody() {
-  //   return FutureBuilder<List<SongsJson>>(
-  //       future: fetchSongs(http.Client()),
-  //       builder: (context, snapshot) {
-  //         return ListView.builder(
-  //           itemCount: 20,
-  //           itemBuilder: (context, index) => ListTile(
-  //               leading: ConstrainedBox(
-  //                 constraints: BoxConstraints(
-  //                   minWidth: 50,
-  //                   minHeight: 50,
-  //                   maxWidth: 50,
-  //                   maxHeight: 50,
-  //                 ),
-  //                 child: Image.asset(songs[index].title, fit: BoxFit.cover),
-  //               ),
-  //               title: Text(
-  //                 songs[index].title,
-  //                 style: TextStyle(
-  //                   fontSize: 16,
-  //                   fontWeight: FontWeight.w600,
-  //                 ),
-  //               ),
-  //               // subtitle: Text(
-  //               //   '${songs[index].description.toString()}',
-  //               //   style: TextStyle(
-  //               //     fontSize: 12,
-  //               //     fontWeight: FontWeight.w600,
-  //               //   ),
-  //               // ),
-  //               onTap: () {
-  //                 // Navigator.push(
-  //                 //     context,
-  //                 //     PageTransition(
-  //                 //         alignment: Alignment.bottomCenter,
-  //                 //         child: AlbumPage(
-  //                 //           song: songs[index],
-  //                 //         ),
-  //                 //         type: null));
-  //               }),
-  //         );
-  //       });
-  // }
-// }

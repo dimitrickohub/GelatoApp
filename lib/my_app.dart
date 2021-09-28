@@ -1,5 +1,3 @@
-import 'dart:developer' as developer;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/config.dart';
 
@@ -49,7 +47,6 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _email = (prefs.getString('email') ?? null);
     });
-    developer.log("Email from MyApp " + _email.toString());
   }
 
   @override
@@ -61,13 +58,6 @@ class _MyAppState extends State<MyApp> {
     });
     super.didChangeDependencies();
   }
-
-  // final routes = <String, WidgetBuilder>{
-  //   '/Landing': (BuildContext context) => LandingPage()
-  // };
-  // final routes1 = <String, WidgetBuilder>{
-  //   '/Register': (BuildContext context) => RegisterPage()
-  // };
 
   @override
   void initState() {
@@ -103,10 +93,6 @@ class _MyAppState extends State<MyApp> {
             darkTheme: darkTheme.themeData,
             themeMode: currentTheme.carrentTheme(),
             home: SplashScreen(),
-            // _email == null ? RegisterPage() : RootApp(),
-            // home: SplashScreen(),
-            // routes: routes,
-            // home: RegisterPage(),
             locale: _locale,
             supportedLocales: [
               Locale("en", "US"),
@@ -127,8 +113,6 @@ class _MyAppState extends State<MyApp> {
               }
               return supportedLocales.first;
             },
-            // onGenerateRoute: CustomRouter.generatedRoute,
-            // initialRoute: homeRoute,
           ),
         ),
       );

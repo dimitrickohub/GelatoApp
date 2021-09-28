@@ -29,8 +29,8 @@ class _RootAppState extends State<RootApp> {
       children: [
         HomePage(),
         SearchPage(),
-        TestPage(),
-        // FavoritePage(),
+        // TestPage(),
+        FavoritePage(),
       ],
     );
   }

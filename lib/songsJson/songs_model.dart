@@ -1,22 +1,3 @@
-// import 'dart:async';
-// import 'dart:convert';
-// import 'package:http/http.dart' as http;
-// import 'dart:developer' as developer;
-
-// List<SongsJson> parseSongs(String responseBody) {
-//   // final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-//   developer.log(responseBody.toString());
-
-//   return parsed.map<SongsJson>((json) => SongsJson.fromJson(json)).toList();
-// }
-
-// Future<List<SongsJson>> fetchSongs() async {
-//   final response = await http.get(Uri.parse(
-//       'https://run.mocky.io/v3/5810fb90-5f5f-4774-80f4-5a634172317a'));
-
-//   return parseSongs(response.body);
-// }
-
 import 'package:flutter/cupertino.dart';
 
 class SongsJson {

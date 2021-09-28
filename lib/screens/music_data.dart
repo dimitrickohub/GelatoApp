@@ -41,14 +41,10 @@ class _MusicDataState extends State<MusicData> {
   }
 
   stopSound(remoteUrl) async {
-    // Uri audioFile = await audioCache.load(remoteUrl);
-    // await advancedPlayer.setUrl(audioFile.path);
     advancedPlayer?.pause();
   }
 
   seekSound() async {
-    // Future<Uri> audioFile = audioCache!.load(widget.songUrl.toString());
-    // await advancedPlayer!.setUrl(audioFile.toString());
     advancedPlayer?.seek(Duration(milliseconds: 1200));
   }
 
@@ -188,14 +184,7 @@ class _MusicDataState extends State<MusicData> {
                     CupertinoIcons.back,
                     size: 25,
                   ),
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     PageTransition(
-                    //         alignment: Alignment.bottomCenter,
-                    //         child: MusicData(),
-                    //         type: PageTransitionType.scale));
-                  },
+                  onPressed: () {},
                 ),
                 IconButton(
                     iconSize: 50,
@@ -226,18 +215,9 @@ class _MusicDataState extends State<MusicData> {
                     iconSize: 50,
                     icon: Icon(
                       CupertinoIcons.forward,
-                      // Feather.skip_forward,
-                      // color: white.withOpacity(0.8),
                       size: 25,
                     ),
                     onPressed: () {}),
-                // IconButton(
-                //     icon: Icon(
-                //       AntDesign.retweet,
-                //       color: white.withOpacity(0.8),
-                //       size: 25,
-                //     ),
-                //     onPressed: null),
               ],
             ),
           ),

@@ -8,10 +8,3 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MyApp());
 }
-// void main() => runApp(MyApp());
-  //   MaterialApp(
-  //     debugShowCheckedModeBanner: false,
-  //     home: RegisterPage(),
-  //   ),
-  // );
-// }

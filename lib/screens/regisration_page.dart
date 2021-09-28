@@ -1,5 +1,3 @@
-import 'dart:developer' as developer;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/classes/sharedpref.dart';
@@ -177,9 +175,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               setState(() => _loading = true);
                             },
                           )
-
-                        //_pageTransition();
-
                         : Center(
                             child: CircularProgressIndicator(
                               valueColor:
@@ -250,8 +245,6 @@ class _RegisterPageState extends State<RegisterPage> {
       _emailController.clear();
       _passwordController.clear();
       _pageTransition();
-
-      developer.log(SaveData.localStorage.getString('email')!);
     }
   }
 }
