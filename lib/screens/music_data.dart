@@ -7,17 +7,12 @@ import 'package:audioplayers/audioplayers.dart';
 class MusicData extends StatefulWidget {
   final String? title;
   final String? description;
-  final Color? color;
+
   final String? img;
   final String? songUrl;
 
   const MusicData(
-      {Key? key,
-      this.title,
-      this.description,
-      this.color,
-      this.img,
-      this.songUrl})
+      {Key? key, this.title, this.description, this.img, this.songUrl})
       : super(key: key);
   @override
   _MusicDataState createState() => _MusicDataState();
@@ -52,8 +47,8 @@ class _MusicDataState extends State<MusicData> {
   }
 
   seekSound() async {
-    // Uri audioFile = audioCache.load(widget.songUrl);
-    // await advancedPlayer.setUrl(audioFile.path);
+    // Future<Uri> audioFile = audioCache!.load(widget.songUrl.toString());
+    // await advancedPlayer!.setUrl(audioFile.toString());
     advancedPlayer?.seek(Duration(milliseconds: 1200));
   }
 
@@ -180,25 +175,6 @@ class _MusicDataState extends State<MusicData> {
                   _currentSliderValue = value;
                 });
               }),
-          // SizedBox(
-          //   height: 20,
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.only(left: 30, right: 30),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       Text(
-          //         "00:00",
-          //         style: TextStyle(color: white.withOpacity(0.5)),
-          //       ),
-          //       Text(
-          //         "45:54",
-          //         style: TextStyle(color: white.withOpacity(0.5)),
-          //       )
-          //     ],
-          //   ),
-          // ),
           SizedBox(
             height: 10,
           ),
@@ -207,18 +183,9 @@ class _MusicDataState extends State<MusicData> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // IconButton(
-                //     icon: Icon(
-                //       Feather.shuffle,
-                //       color: white.withOpacity(0.8),
-                //       size: 25,
-                //     ),
-                //     onPressed: null),
                 IconButton(
                   icon: Icon(
                     CupertinoIcons.back,
-                    // Feather.skip_back,
-                    // color: white.withOpacity(0.8),
                     size: 25,
                   ),
                   onPressed: () {

@@ -2,6 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_application_2/classes/favorite_list.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
 
 import 'package:flutter_application_2/screens/music_data.dart';
@@ -25,15 +26,33 @@ class AlbumPage extends StatefulWidget {
 class _AlbumPageState extends State<AlbumPage> {
   bool _isSub = false;
 
-  List<String> listSongs = [];
-  void _toggleFavorite() {
+  List<FavoriteList>? music;
+
+  void _saveFavorites() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final String encodedData = FavoriteList.encode([
+      FavoriteList(
+        img: widget.song?.img,
+        title: widget.song?.title,
+        description: widget.song?.description,
+        songUrl: widget.song?.songUrl,
+      )
+    ]);
+
+    prefs.setString('favList', encodedData);
+  }
+
+  void _toggleFavorite() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
     setState(() {
       if (_isSub) {
         _isSub = false;
-        listSongs.add(widget.song?.img);
+        prefs.setBool('_isSub', _isSub);
       } else {
         _isSub = true;
-        listSongs.remove(widget.song?.img);
+        prefs.setBool('_isSub', _isSub);
       }
     });
   }
@@ -42,6 +61,7 @@ class _AlbumPageState extends State<AlbumPage> {
   void initState() {
     super.initState();
     _toggleFavorite();
+    _saveFavorites();
   }
 
   @override
@@ -122,29 +142,8 @@ class _AlbumPageState extends State<AlbumPage> {
                                     ),
                                     onPressed: () async {
                                       _toggleFavorite();
-
-                                      SharedPreferences prefs =
-                                          await SharedPreferences.getInstance();
-                                      prefs.setStringList(
-                                          'listOfSongs', listSongs);
-                                    }
-                                    // () => {
-                                    //       setState(() {
-                                    //         _isSub = !_isSub;
-                                    //       }),
-
-                                    //     }
-                                    // =>
-                                    //     setState(() => pressAttention = !pressAttention)
-                                    // {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //       builder: (BuildContext context) =>
-                                    //           new FavoritePage(),
-                                    // ));
-                                    // },
-                                    ),
+                                      _saveFavorites();
+                                    }),
                               ),
                             ],
                           ),
@@ -170,7 +169,6 @@ class _AlbumPageState extends State<AlbumPage> {
                                               child: MusicData(
                                                 title:
                                                     songs.result![index].title,
-                                                color: grey,
                                                 description: songs
                                                     .result![index].description,
                                                 img: widget.song.img,
@@ -250,76 +248,76 @@ class _AlbumPageState extends State<AlbumPage> {
                         SizedBox(
                           height: 30,
                         ),
-                        Column(
-                            children:
-                                List.generate(songs.result!.length, (index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                                left: 30, right: 30, bottom: 10),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        alignment: Alignment.bottomCenter,
-                                        child: MusicData(
-                                          title: songs.result![index].title
-                                              .toString(),
-                                          color: grey,
-                                          description: songs
-                                              .result![index].description
-                                              .toString(),
-                                          img: songs.result![index].img,
-                                          songUrl: songs.result![index].songUrl
-                                              .toString(),
-                                        ),
-                                        type: PageTransitionType.scale));
-                              },
-                              // child: Row(
-                              //   children: [
-                              //     Container(
-                              //       width: (size.width - 60) * 0.77,
-                              //       child: Text(
-                              //         "${index + 1}" +
-                              //             songs.result![index].songs![index].title
-                              //                 .toString(),
-                              //       ),
-                              //     ),
-                              //     Container(
-                              //         width: (size.width - 60) * 0.23,
-                              //         height: 50,
-                              //         child: Row(
-                              //           mainAxisAlignment:
-                              //               MainAxisAlignment.spaceBetween,
-                              //           children: [
-                              //             Text(
-                              //               songs.result![index].songs![index]
-                              //                   .duration
-                              //                   .toString(),
-                              //               style: TextStyle(
-                              //                   color: grey, fontSize: 14),
-                              //             ),
-                              //             Container(
-                              //               width: 25,
-                              //               height: 25,
-                              //               decoration: BoxDecoration(
-                              //                 shape: BoxShape.circle,
-                              //                 color: grey.withOpacity(0.8),
-                              //               ),
-                              //               child: Center(
-                              //                 child: Icon(
-                              //                   Icons.play_arrow,
-                              //                   size: 16,
-                              //                 ),
-                              //               ),
-                              //             )
-                              //           ],
-                              //         )),
-                              //   ],
-                              // ),
-                            ),
-                          );
-                        }))
+                        // Column(
+                        //     children:
+                        //         List.generate(songs.result!.length, (index) {
+                        //   return Padding(
+                        //     padding: const EdgeInsets.only(
+                        //         left: 30, right: 30, bottom: 10),
+                        //     child: GestureDetector(
+                        //       onTap: () {
+                        //         Navigator.push(
+                        //             context,
+                        //             PageTransition(
+                        //                 alignment: Alignment.bottomCenter,
+                        //                 child: MusicData(
+                        //                   title: songs.result![index].title
+                        //                       .toString(),
+                        //                   color: grey,
+                        //                   description: songs
+                        //                       .result![index].description
+                        //                       .toString(),
+                        //                   img: songs.result![index].img,
+                        //                   songUrl: songs.result![index].songUrl
+                        //                       .toString(),
+                        //                 ),
+                        //                 type: PageTransitionType.scale));
+                        //       },
+                        //       // child: Row(
+                        //       //   children: [
+                        //       //     Container(
+                        //       //       width: (size.width - 60) * 0.77,
+                        //       //       child: Text(
+                        //       //         "${index + 1}" +
+                        //       //             songs.result![index].songs![index].title
+                        //       //                 .toString(),
+                        //       //       ),
+                        //       //     ),
+                        //       //     Container(
+                        //       //         width: (size.width - 60) * 0.23,
+                        //       //         height: 50,
+                        //       //         child: Row(
+                        //       //           mainAxisAlignment:
+                        //       //               MainAxisAlignment.spaceBetween,
+                        //       //           children: [
+                        //       //             Text(
+                        //       //               songs.result![index].songs![index]
+                        //       //                   .duration
+                        //       //                   .toString(),
+                        //       //               style: TextStyle(
+                        //       //                   color: grey, fontSize: 14),
+                        //       //             ),
+                        //       //             Container(
+                        //       //               width: 25,
+                        //       //               height: 25,
+                        //       //               decoration: BoxDecoration(
+                        //       //                 shape: BoxShape.circle,
+                        //       //                 color: grey.withOpacity(0.8),
+                        //       //               ),
+                        //       //               child: Center(
+                        //       //                 child: Icon(
+                        //       //                   Icons.play_arrow,
+                        //       //                   size: 16,
+                        //       //                 ),
+                        //       //               ),
+                        //       //             )
+                        //       //           ],
+                        //       //         )),
+                        //       //   ],
+                        //       // ),
+                        //     ),
+                        //   );
+                        // }))
                       ],
                     ),
                     SafeArea(

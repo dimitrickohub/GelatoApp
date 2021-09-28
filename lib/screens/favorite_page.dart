@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/classes/favorite_list.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
-import 'package:flutter_application_2/screens/album_page.dart';
-import 'package:flutter_application_2/songsJson/songs_json.dart';
-import 'package:flutter_application_2/songsJson/songs_service.dart';
+import 'package:flutter_application_2/screens/music_data.dart';
+
 import 'package:page_transition/page_transition.dart';
-import 'package:provider/provider.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -13,6 +13,25 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
+  List<FavoriteList>? songs;
+  String? songsString;
+  Future _fetchSongs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      songsString = (prefs.getString('favList') ?? '');
+
+      songs = FavoriteList.decode(songsString.toString());
+    });
+
+    return songs;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchSongs();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,44 +60,57 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 
   Widget getBody() {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: song.length,
-        itemBuilder: (context, index) => ListTile(
-            leading: ConstrainedBox(
-              constraints: BoxConstraints(
-                minWidth: 50,
-                minHeight: 50,
-                maxWidth: 50,
-                maxHeight: 50,
+    return FutureBuilder(
+      builder: (context, AsyncSnapshot snapshot) {
+        if (ConnectionState.active != null && !snapshot.hasData) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (ConnectionState.done != null && snapshot.hasError) {
+          return Center(child: Text(snapshot.error.toString()));
+        }
+        return ListView.builder(
+          itemCount: snapshot.data!.length,
+          itemBuilder: (context, index) => ListTile(
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 50,
+                  minHeight: 50,
+                  maxWidth: 50,
+                  maxHeight: 50,
+                ),
+                child: Image.network(songs![index].img.toString(),
+                    fit: BoxFit.cover),
               ),
-              child: Image.asset(song[index]['img'], fit: BoxFit.cover),
-            ),
-            title: Text(
-              song[index]['description'],
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+              title: Text(
+                songs![index].description.toString(),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            subtitle: Text(
-              '${song[index]['title'].toString()}',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
+              subtitle: Text(
+                '${songs![index].title.toString()}',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      alignment: Alignment.bottomCenter,
-                      child: AlbumPage(
-                        song: song[index],
-                      ),
-                      type: PageTransitionType.scale));
-            }),
-      ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        alignment: Alignment.bottomCenter,
+                        child: MusicData(
+                          title: songs![index].title.toString(),
+                          description: songs![index].description.toString(),
+                          img: songs![index].img.toString(),
+                          songUrl: songs![index].songUrl.toString(),
+                        ),
+                        type: PageTransitionType.scale));
+              }),
+        );
+      },
+      future: _fetchSongs(),
     );
   }
 }

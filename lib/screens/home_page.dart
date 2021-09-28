@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_2/localization/language_constants.dart';
-import 'package:flutter_application_2/screens/album_page.dart';
+
 import 'package:flutter_application_2/screens/settings_page.dart';
 import 'package:flutter_application_2/songsJson/songs_json.dart';
 import 'package:flutter_application_2/songsJson/songs_model.dart';
@@ -11,7 +11,8 @@ import 'package:flutter_application_2/songsJson/songs_service.dart';
 import 'package:flutter_application_2/theme/colors.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'album_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -314,7 +315,6 @@ class _HomePageState extends State<HomePage> {
                                               .toString(),
                                           style: TextStyle(
                                             fontSize: 15,
-                                            // color: white,
                                             fontWeight: FontWeight.w600,
                                           )),
                                       SizedBox(
