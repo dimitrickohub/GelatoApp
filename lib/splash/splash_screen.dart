@@ -6,6 +6,8 @@ import 'package:flutter_application_2/root_app.dart';
 import 'package:flutter_application_2/screens/regisration_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+const String kLogoImage = 'assets/images/logo.png';
+
 class SplashScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -33,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(
-                image: AssetImage("assets/images/logo.png"), fit: BoxFit.fill),
+                image: AssetImage(kLogoImage), fit: BoxFit.fill),
           ),
         ),
       ),
@@ -42,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void startTimer() {
     Timer(Duration(seconds: 3), () {
-      navigateUser(); //It will redirect  after 3 seconds
+      navigateUser();
     });
   }
 
@@ -50,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? status = (prefs.getString('email') ?? null);
     print(status);
-    // print("Splash is work!  email: " + prefs.getString('email')!);
+
     if (status != null) {
       Navigator.pushReplacement(context, routeLand);
     } else {
@@ -58,44 +60,3 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 }
-
-
-
-
-// import 'dart:async';
-
-// import 'package:flutter/material.dart';
-
-// class SplashScreen extends StatefulWidget {
-//   final String nextRoute;
-
-//   SplashScreen({this.nextRoute});
-//   @override
-//   State<StatefulWidget> createState() => _SplashScreenState();
-// }
-
-// class _SplashScreenState extends State<SplashScreen> {
-//   @override
-//   void initState() {
-//     super.initState();
-//     Timer(Duration(seconds: 2), () {
-//       Navigator.of(context).pushReplacementNamed(widget.nextRoute);
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.blue,
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             Text('EVILEG'),
-//             Text("Welcome to social network of programmers")
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
