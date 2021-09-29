@@ -63,25 +63,25 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Image(
+              const Image(
                 width: 100,
                 height: 100,
                 image: AssetImage(kLogoImage),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
-              Text(
+              const Text(
                 'Gelatö',
                 style: TextStyle(
                     color: white, fontWeight: FontWeight.w600, fontSize: 30),
               ),
             ]),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
@@ -89,33 +89,33 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: EdgeInsets.all(10),
                 child: Text(
                   getTranslated(context, kWelconeBack)!,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: grey, fontWeight: FontWeight.w600, fontSize: 18),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
               decoration: BoxDecoration(
                 color: Colors.white.withAlpha(20),
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(20),
                 ),
               ),
               child: Row(
                 children: <Widget>[
-                  Icon(
+                  const Icon(
                     CupertinoIcons.person,
                     color: primary,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Expanded(
                     child: TextField(
                       controller: _emailController,
-                      style: TextStyle(color: white),
+                      style: const TextStyle(color: white),
                       decoration: InputDecoration(
                         hintText: getTranslated(context, _kUserName),
                         hintStyle: TextStyle(
@@ -128,31 +128,31 @@ class _RegisterPageState extends State<RegisterPage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
               decoration: BoxDecoration(
                 color: Colors.white.withAlpha(20),
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(20),
                 ),
               ),
               child: Row(
                 children: <Widget>[
-                  Icon(
+                  const Icon(
                     CupertinoIcons.lock,
                     color: primary,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Expanded(
                     child: TextField(
                       obscureText: true,
                       controller: _passwordController,
-                      style: TextStyle(color: white),
+                      style: const TextStyle(color: white),
                       decoration: InputDecoration(
                         hintText: getTranslated(context, kPassword),
                         hintStyle: TextStyle(
@@ -165,13 +165,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Container(
               height: 60,
               width: 400,
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: !_loading
                   ? ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -181,7 +181,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       child: Text(
                         getTranslated(context, _kSignIn)!,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: white,
                             fontWeight: FontWeight.w600,
                             fontSize: 20),
@@ -191,7 +191,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         setState(() => _loading = true);
                       },
                     )
-                  : Center(
+                  : const Center(
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(primary),
                       ),
@@ -203,13 +203,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: <Widget>[
                   Text(
                     getTranslated(context, kSingUpText)!,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: grey, fontWeight: FontWeight.w600, fontSize: 15),
                   ),
                   TextButton(
                     child: Text(
                       getTranslated(context, kSingUp)!,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: primary,
                           fontWeight: FontWeight.w600,
                           fontSize: 15),

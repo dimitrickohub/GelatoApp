@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Text(
                 getTranslated(context, _kExplore)!,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   color: white,
                   fontWeight: FontWeight.bold,
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                             child: SettingsPage(),
                             type: PageTransitionType.scale));
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.settings,
                     color: white,
                   ))
@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                                                   : grey,
                                               fontWeight: FontWeight.w600),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 3,
                                         ),
                                         activeMenu1 == index
@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                               })),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       SingleChildScrollView(
@@ -179,17 +179,17 @@ class _HomePageState extends State<HomePage> {
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 20,
                                       ),
                                       Text(
                                           songs.result![index].title!
                                               .toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w600,
                                           )),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       Container(
@@ -199,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                                                 .toString(),
                                             maxLines: 1,
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 12,
                                               color: grey,
                                               fontWeight: FontWeight.w600,
@@ -215,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Column(
@@ -250,7 +250,7 @@ class _HomePageState extends State<HomePage> {
                                                   : grey,
                                               fontWeight: FontWeight.w600),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 3,
                                         ),
                                         activeMenu2 == index
@@ -271,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                               })),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       SingleChildScrollView(
@@ -308,17 +308,17 @@ class _HomePageState extends State<HomePage> {
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 20,
                                       ),
                                       Text(
                                           songs.result![index + 5].title!
                                               .toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w600,
                                           )),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       Container(
@@ -328,7 +328,7 @@ class _HomePageState extends State<HomePage> {
                                                 .toString(),
                                             maxLines: 1,
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 12,
                                               color: grey,
                                               fontWeight: FontWeight.w600,
@@ -348,7 +348,7 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }

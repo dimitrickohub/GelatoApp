@@ -49,7 +49,7 @@ class _FavoritePageState extends State<FavoritePage> {
           alignment: Alignment.centerLeft,
           child: Text(
             getTranslated(context, 'favorites')!,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -64,7 +64,7 @@ class _FavoritePageState extends State<FavoritePage> {
       builder: (context, AsyncSnapshot snapshot) {
         // ignore: unnecessary_null_comparison
         if (ConnectionState.active != null && !snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         // ignore: unnecessary_null_comparison
         if (ConnectionState.done != null && snapshot.hasError) {
@@ -111,19 +111,19 @@ class _FavoritePageState extends State<FavoritePage> {
                             children: <Widget>[
                               Text(
                                 songs![index].title.toString(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 25,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Expanded(
                                   child: Container(
                                       child: Text(
                                 songs![index].description.toString(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
                                 ),

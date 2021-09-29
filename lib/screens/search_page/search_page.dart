@@ -50,25 +50,26 @@ class _SearchPageState extends State<SearchPage> {
                                     vertical: 10, horizontal: 10),
                                 child: ListTile(
                                     leading: ConstrainedBox(
-                                      constraints: BoxConstraints(
+                                      constraints: const BoxConstraints(
                                         minWidth: 50,
                                         minHeight: 50,
                                         maxWidth: 50,
                                         maxHeight: 50,
                                       ),
-                                      child: Image.network(songList[index].img,
+                                      child: Image.network(
+                                          songList[index].img.toString(),
                                           fit: BoxFit.cover),
                                     ),
                                     title: Text(
-                                      songList[index].description,
-                                      style: TextStyle(
+                                      songList[index].description.toString(),
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     subtitle: Text(
                                       '${songList[index].title.toString()}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -87,7 +88,7 @@ class _SearchPageState extends State<SearchPage> {
                       : Text(
                           getTranslated(context, 'not_found')!,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             color: primary,
                             fontWeight: FontWeight.bold,
@@ -96,7 +97,7 @@ class _SearchPageState extends State<SearchPage> {
             ],
           );
         } else {
-          return Center(
+          return const Center(
             child: Text('Not found'),
           );
         }
@@ -107,15 +108,15 @@ class _SearchPageState extends State<SearchPage> {
   Column _buildSearch() {
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Container(
-          margin: EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: 10),
           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
           decoration: BoxDecoration(
             color: Colors.white.withAlpha(20),
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(20),
             ),
           ),
@@ -133,18 +134,18 @@ class _SearchPageState extends State<SearchPage> {
                   onChanged: (value) => _runFilter(value),
                 ),
               ),
-              Icon(CupertinoIcons.search, color: primary),
+              const Icon(CupertinoIcons.search, color: primary),
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: Text(
             getTranslated(context, 'search_text')!,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               color: primary,
               fontWeight: FontWeight.bold,

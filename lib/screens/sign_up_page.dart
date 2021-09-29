@@ -55,23 +55,23 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
         backgroundColor: black,
         body: Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Image(
+                    const Image(
                       width: 100,
                       height: 100,
                       image: AssetImage(kImageAsset),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text(
+                    const Text(
                       'Gelatö',
                       style: TextStyle(
                           color: white,
@@ -79,20 +79,20 @@ class _SignUpPageState extends State<SignUpPage> {
                           fontSize: 30),
                     ),
                   ]),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
                       alignment: Alignment.center,
-                      padding: EdgeInsets.all(10),
-                      child: Text(
+                      padding: const EdgeInsets.all(10),
+                      child: const Text(
                         'Welcome!',
                         style: TextStyle(
                             color: grey,
                             fontWeight: FontWeight.w600,
                             fontSize: 18),
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -100,23 +100,23 @@ class _SignUpPageState extends State<SignUpPage> {
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
                     decoration: BoxDecoration(
                       color: Colors.white.withAlpha(20),
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(20),
                       ),
                     ),
                     child: Row(
                       children: <Widget>[
-                        Icon(
+                        const Icon(
                           CupertinoIcons.person,
                           color: primary,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Expanded(
                           child: TextField(
                             controller: _emailController,
-                            style: TextStyle(color: white),
+                            style: const TextStyle(color: white),
                             decoration: InputDecoration(
                               hintText: getTranslated(context, _kUserName),
                               hintStyle: TextStyle(
@@ -129,7 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   Container(
@@ -137,24 +137,24 @@ class _SignUpPageState extends State<SignUpPage> {
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
                     decoration: BoxDecoration(
                       color: Colors.white.withAlpha(20),
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(20),
                       ),
                     ),
                     child: Row(
                       children: <Widget>[
-                        Icon(
+                        const Icon(
                           CupertinoIcons.lock,
                           color: primary,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Expanded(
                           child: TextField(
                             obscureText: true,
                             controller: _passwordController,
-                            style: TextStyle(color: white),
+                            style: const TextStyle(color: white),
                             decoration: InputDecoration(
                               hintText: getTranslated(context, kPassword),
                               hintStyle: TextStyle(
@@ -167,7 +167,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Container(
@@ -175,24 +175,24 @@ class _SignUpPageState extends State<SignUpPage> {
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
                     decoration: BoxDecoration(
                       color: Colors.white.withAlpha(20),
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(20),
                       ),
                     ),
                     child: Row(
                       children: <Widget>[
-                        Icon(
+                        const Icon(
                           CupertinoIcons.lock,
                           color: primary,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Expanded(
                           child: TextField(
                             obscureText: true,
                             controller: _passwordController2,
-                            style: TextStyle(color: white),
+                            style: const TextStyle(color: white),
                             decoration: InputDecoration(
                               hintText: 'Confirm the password',
                               hintStyle: TextStyle(
@@ -205,13 +205,13 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Container(
                     height: 60,
                     width: 400,
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                     child: !_loading
                         ? ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -221,7 +221,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                             child: Text(
                               getTranslated(context, kSingUp)!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: white,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 20),
@@ -242,7 +242,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     fontSize: 16.0);
                             },
                           )
-                        : Center(
+                        : const Center(
                             child: CircularProgressIndicator(
                               valueColor:
                                   AlwaysStoppedAnimation<Color>(primary),

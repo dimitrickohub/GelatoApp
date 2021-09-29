@@ -67,7 +67,7 @@ class _MusicDataState extends State<MusicData> {
       elevation: 0,
       actions: [
         IconButton(
-          icon: Icon(
+          icon: const Icon(
             CupertinoIcons.ellipsis_vertical,
           ),
           onPressed: () {},
@@ -90,7 +90,7 @@ class _MusicDataState extends State<MusicData> {
                   height: size.width - 100,
                   decoration: BoxDecoration(
                     boxShadow: [
-                      BoxShadow(
+                      const BoxShadow(
                         color: grey,
                         blurRadius: 50,
                         spreadRadius: 5,
@@ -116,7 +116,7 @@ class _MusicDataState extends State<MusicData> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Padding(
@@ -127,14 +127,14 @@ class _MusicDataState extends State<MusicData> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
+                  const Icon(
                     CupertinoIcons.folder,
                   ),
                   Column(
                     children: [
                       Text(
                         widget.title.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Container(
@@ -149,14 +149,14 @@ class _MusicDataState extends State<MusicData> {
                       )
                     ],
                   ),
-                  Icon(
+                  const Icon(
                     CupertinoIcons.ellipsis_vertical,
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Slider(
@@ -170,7 +170,7 @@ class _MusicDataState extends State<MusicData> {
                   _currentSliderValue = value;
                 });
               }),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Padding(
@@ -179,7 +179,7 @@ class _MusicDataState extends State<MusicData> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     CupertinoIcons.back,
                     size: 25,
                   ),
@@ -188,8 +188,8 @@ class _MusicDataState extends State<MusicData> {
                 IconButton(
                     iconSize: 50,
                     icon: Container(
-                      decoration:
-                          BoxDecoration(shape: BoxShape.circle, color: primary),
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: primary),
                       child: Center(
                         child: Icon(
                           isPlaying ? CupertinoIcons.stop : CupertinoIcons.play,
@@ -212,7 +212,7 @@ class _MusicDataState extends State<MusicData> {
                     }),
                 IconButton(
                     iconSize: 50,
-                    icon: Icon(
+                    icon: const Icon(
                       CupertinoIcons.forward,
                       size: 25,
                     ),
@@ -220,22 +220,22 @@ class _MusicDataState extends State<MusicData> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 CupertinoIcons.tv,
                 color: primary,
                 size: 20,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 3),
+              const Padding(
+                padding: EdgeInsets.only(top: 3),
                 child: Text(
                   'Chromecast is ready',
                   style: TextStyle(

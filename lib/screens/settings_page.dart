@@ -77,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
         alignment: Alignment.centerLeft,
         child: Text(
           getTranslated(context, kSettings)!,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -85,7 +85,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       actions: <Widget>[
         Padding(
-          padding: EdgeInsets.only(right: 20),
+          padding: const EdgeInsets.only(right: 20),
           child: IconButton(
               onPressed: () {
                 if (_isTap) {
@@ -112,11 +112,11 @@ class _SettingsPageState extends State<SettingsPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             Container(
@@ -126,8 +126,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                     image: (_image != null
-                        ? FileImage(_image)
-                        : AssetImage(kLogoImage)) as ImageProvider<Object>,
+                            ? FileImage(_image)
+                            : const AssetImage(kLogoImage))
+                        as ImageProvider<Object>,
                     fit: BoxFit.fill),
               ),
               child: TextButton(
@@ -137,7 +138,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Text(''),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Column(
@@ -154,11 +155,11 @@ class _SettingsPageState extends State<SettingsPage> {
               ],
             ),
           ]),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           Container(
-            padding: EdgeInsets.only(left: 20, right: 10),
+            padding: const EdgeInsets.only(left: 20, right: 10),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<Language>(
                 dropdownColor: primary,
@@ -166,7 +167,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 iconEnabledColor: primary,
                 hint: Text(
                   getTranslated(context, kChangeLanguage)!,
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600, fontSize: 15),
                 ),
                 onChanged: (Language? language) {
                   _changeLanguage(language!);
@@ -186,14 +188,14 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: Container(
                                 child: Text(
                                   e.flag,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(e.name,
@@ -209,7 +211,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           Padding(
@@ -222,7 +224,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               child: Text(
                 getTranslated(context, kLogOut)!,
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                style:
+                    const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
               ),
               onPressed: () {
                 SaveData.remove();

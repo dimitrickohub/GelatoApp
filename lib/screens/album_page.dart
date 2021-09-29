@@ -105,7 +105,7 @@ class _AlbumPageState extends State<AlbumPage> {
                                 fit: BoxFit.cover),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Padding(
@@ -114,7 +114,7 @@ class _AlbumPageState extends State<AlbumPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(widget.song.title,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   )),
@@ -154,7 +154,7 @@ class _AlbumPageState extends State<AlbumPage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         SingleChildScrollView(
@@ -198,17 +198,17 @@ class _AlbumPageState extends State<AlbumPage> {
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
                                         Text(
                                             songs.result![index].title
                                                 .toString(),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 15,
                                               fontWeight: FontWeight.w600,
                                             )),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
                                         Container(
@@ -224,7 +224,7 @@ class _AlbumPageState extends State<AlbumPage> {
                                                         .toString(),
                                                     maxLines: 1,
                                                     textAlign: TextAlign.center,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       fontSize: 12,
                                                       color: grey,
                                                       fontWeight:
@@ -235,7 +235,7 @@ class _AlbumPageState extends State<AlbumPage> {
                                                         .toString(),
                                                     maxLines: 1,
                                                     textAlign: TextAlign.center,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       fontSize: 12,
                                                       color: grey,
                                                       fontWeight:
@@ -251,7 +251,7 @@ class _AlbumPageState extends State<AlbumPage> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Column(
@@ -300,7 +300,7 @@ class _AlbumPageState extends State<AlbumPage> {
                                             songs.result![index].songs![index]
                                                 .duration
                                                 .toString(),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: grey, fontSize: 14),
                                           ),
                                           Container(
@@ -310,7 +310,7 @@ class _AlbumPageState extends State<AlbumPage> {
                                               shape: BoxShape.circle,
                                               color: grey.withOpacity(0.8),
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Icon(
                                                 Icons.play_arrow,
                                                 size: 16,
@@ -331,7 +331,7 @@ class _AlbumPageState extends State<AlbumPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               CupertinoIcons.back,
                             ),
                             onPressed: () {
@@ -339,7 +339,7 @@ class _AlbumPageState extends State<AlbumPage> {
                             },
                           ),
                           IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               CupertinoIcons.add,
                             ),
                             onPressed: () {
@@ -354,7 +354,7 @@ class _AlbumPageState extends State<AlbumPage> {
               );
             });
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }

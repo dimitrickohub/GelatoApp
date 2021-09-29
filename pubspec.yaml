@@ -26,6 +26,7 @@ dependencies:
   build_runner: ^2.1.2
   chopper_generator: ^4.0.1
   
+  
 
 dev_dependencies:
   flutter_test:
