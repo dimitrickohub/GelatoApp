@@ -17,6 +17,11 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 
+const String kSettings = 'settings';
+const String kLogoImage = 'assets/images/profile.png';
+const String kChangeLanguage = 'change_language';
+const String kLogOut = 'log_out';
+
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();
@@ -71,7 +76,7 @@ class _SettingsPageState extends State<SettingsPage> {
       title: Container(
         alignment: Alignment.centerLeft,
         child: Text(
-          getTranslated(context, 'settings')!,
+          getTranslated(context, kSettings)!,
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -121,9 +126,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                     image: (_image != null
-                            ? FileImage(_image)
-                            : AssetImage('assets/images/profile.png'))
-                        as ImageProvider<Object>,
+                        ? FileImage(_image)
+                        : AssetImage(kLogoImage)) as ImageProvider<Object>,
                     fit: BoxFit.fill),
               ),
               child: TextButton(
@@ -161,7 +165,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 iconSize: 30,
                 iconEnabledColor: primary,
                 hint: Text(
-                  getTranslated(context, 'change_language')!,
+                  getTranslated(context, kChangeLanguage)!,
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                 ),
                 onChanged: (Language? language) {
@@ -217,7 +221,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     borderRadius: BorderRadius.circular(20)),
               ),
               child: Text(
-                getTranslated(context, 'log_out')!,
+                getTranslated(context, kLogOut)!,
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
               ),
               onPressed: () {

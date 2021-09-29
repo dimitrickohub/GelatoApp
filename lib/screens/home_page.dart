@@ -14,6 +14,8 @@ import 'package:provider/provider.dart';
 
 import 'album_page.dart';
 
+const _kExplore = 'explore';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                getTranslated(context, 'explore')!,
+                getTranslated(context, _kExplore)!,
                 style: TextStyle(
                   fontSize: 20,
                   color: white,

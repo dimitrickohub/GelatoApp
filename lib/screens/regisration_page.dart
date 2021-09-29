@@ -13,6 +13,14 @@ import 'package:flutter_application_2/theme/colors.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
 
+const String _kSignIn = 'sign_in';
+const String _kUserName = 'user_name';
+const String kLogoImage = 'assets/images/logo.png';
+const String kSingUpText = 'sign_up_text';
+const String kSingUp = 'sign_up';
+const String kWelconeBack = 'welcome_back';
+const String kPassword = 'password';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({
     Key? key,
@@ -25,194 +33,203 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool _loading = false;
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  late TextEditingController _emailController;
+  late TextEditingController _passwordController;
 
-  late String _email;
-  late String _password;
+  String? _email;
+  String? _password;
 
   AuthService _authService = AuthService();
 
   @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: black,
-        body: Padding(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 50,
+      backgroundColor: black,
+      body: Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 50,
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Image(
+                width: 100,
+                height: 100,
+                image: AssetImage(kLogoImage),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                'Gelatö',
+                style: TextStyle(
+                    color: white, fontWeight: FontWeight.w600, fontSize: 30),
+              ),
+            ]),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  getTranslated(context, kWelconeBack)!,
+                  style: TextStyle(
+                      color: grey, fontWeight: FontWeight.w600, fontSize: 18),
+                )),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+              decoration: BoxDecoration(
+                color: Colors.white.withAlpha(20),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Image(
-                    width: 100,
-                    height: 100,
-                    image: AssetImage('assets/images/logo.png'),
+              ),
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    CupertinoIcons.person,
+                    color: primary,
                   ),
                   SizedBox(
-                    width: 20,
+                    width: 5,
                   ),
+                  Expanded(
+                    child: TextField(
+                      controller: _emailController,
+                      style: TextStyle(color: white),
+                      decoration: InputDecoration(
+                        hintText: getTranslated(context, _kUserName),
+                        hintStyle: TextStyle(
+                          color: primary.withAlpha(120),
+                        ),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+              decoration: BoxDecoration(
+                color: Colors.white.withAlpha(20),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    CupertinoIcons.lock,
+                    color: primary,
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Expanded(
+                    child: TextField(
+                      obscureText: true,
+                      controller: _passwordController,
+                      style: TextStyle(color: white),
+                      decoration: InputDecoration(
+                        hintText: getTranslated(context, kPassword),
+                        hintStyle: TextStyle(
+                          color: primary.withAlpha(120),
+                        ),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              height: 60,
+              width: 400,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: !_loading
+                  ? ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: primary,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                      child: Text(
+                        getTranslated(context, _kSignIn)!,
+                        style: TextStyle(
+                            color: white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20),
+                      ),
+                      onPressed: () {
+                        _signInButtonAction();
+                        setState(() => _loading = true);
+                      },
+                    )
+                  : Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(primary),
+                      ),
+                    ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
                   Text(
-                    'Gelatö',
+                    getTranslated(context, kSingUpText)!,
                     style: TextStyle(
-                        color: white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 30),
+                        color: grey, fontWeight: FontWeight.w600, fontSize: 15),
                   ),
-                ]),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
+                  TextButton(
                     child: Text(
-                      getTranslated(context, 'welcome_back')!,
+                      getTranslated(context, kSingUp)!,
                       style: TextStyle(
-                          color: grey,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18),
-                    )),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withAlpha(20),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        CupertinoIcons.person,
-                        color: primary,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Expanded(
-                        child: TextField(
-                          controller: _emailController,
-                          style: TextStyle(color: white),
-                          decoration: InputDecoration(
-                            hintText: getTranslated(context, 'user_name'),
-                            hintStyle: TextStyle(
-                              color: primary.withAlpha(120),
-                            ),
-                            border: InputBorder.none,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withAlpha(20),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        CupertinoIcons.lock,
-                        color: primary,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Expanded(
-                        child: TextField(
-                          obscureText: true,
-                          controller: _passwordController,
-                          style: TextStyle(color: white),
-                          decoration: InputDecoration(
-                            hintText: getTranslated(context, 'password'),
-                            hintStyle: TextStyle(
-                              color: primary.withAlpha(120),
-                            ),
-                            border: InputBorder.none,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                    height: 60,
-                    width: 400,
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: !_loading
-                        ? ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: primary,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
-                            child: Text(
-                              getTranslated(context, 'sign_in')!,
-                              style: TextStyle(
-                                  color: white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20),
-                            ),
-                            onPressed: () {
-                              _signInButtonAction();
-                              setState(() => _loading = true);
-                            },
-                          )
-                        : Center(
-                            child: CircularProgressIndicator(
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(primary),
-                            ),
-                          )),
-                Container(
-                    child: Row(
-                  children: <Widget>[
-                    Text(
-                      getTranslated(context, 'sign_up_text')!,
-                      style: TextStyle(
-                          color: grey,
+                          color: primary,
                           fontWeight: FontWeight.w600,
                           fontSize: 15),
                     ),
-                    TextButton(
-                      child: Text(
-                        getTranslated(context, 'sign_up')!,
-                        style: TextStyle(
-                            color: primary,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                alignment: Alignment.center,
-                                child: SignUpPage(),
-                                type: PageTransitionType.scale));
-                      },
-                    )
-                  ],
-                  mainAxisAlignment: MainAxisAlignment.center,
-                ))
-              ],
-            )));
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              alignment: Alignment.center,
+                              child: SignUpPage(),
+                              type: PageTransitionType.scale));
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _pageTransition() {
@@ -226,12 +243,12 @@ class _RegisterPageState extends State<RegisterPage> {
   void _signInButtonAction() async {
     _email = _emailController.text;
     _password = _passwordController.text;
-    SaveData.saveLoginPass(_email.trim(), _password.trim());
+    SaveData.saveLoginPass(_email!.trim(), _password!.trim());
 
-    if (_email.isEmpty || _password.isEmpty) return;
+    if (_email!.isEmpty || _password!.isEmpty) return;
 
     Userdom? user = await _authService.singInWithEmailAndPassword(
-        _email.trim(), _password.trim());
+        _email!.trim(), _password!.trim());
     if (user == null) {
       Fluttertoast.showToast(
           msg: 'Can not Sign-In you, please check your email and password',

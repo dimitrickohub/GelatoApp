@@ -9,7 +9,7 @@ import 'package:flutter_application_2/theme/colors.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-import 'album_page.dart';
+import '../album_page.dart';
 
 class SearchPage extends StatefulWidget {
   @override

@@ -140,7 +140,11 @@ class _AlbumPageState extends State<AlbumPage> {
                                     ),
                                     onPressed: () async {
                                       setState(() {
-                                        if (_isSub) _isSub = false;
+                                        if (_isSub) {
+                                          _isSub = false;
+                                        } else {
+                                          _isSub = true;
+                                        }
                                       });
                                       // _toggleFavorite();
 
@@ -173,7 +177,7 @@ class _AlbumPageState extends State<AlbumPage> {
                                                     songs.result![index].title,
                                                 description: songs
                                                     .result![index].description,
-                                                img: widget.song.img,
+                                                img: songs.result![index].img,
                                                 songUrl: songs
                                                     .result![index].songUrl,
                                               ),

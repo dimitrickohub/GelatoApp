@@ -20,16 +20,10 @@ class _FavoritePageState extends State<FavoritePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       songsString = (prefs.getString('favList') ?? '');
-
       songs = FavoriteList.decode(songsString.toString());
     });
-    _addSongs();
-    return songs;
-  }
 
-  Future _addSongs() async {
-    songlist!.add(songs!.last);
-    return songlist;
+    return songs;
   }
 
   @override
@@ -106,8 +100,8 @@ class _FavoritePageState extends State<FavoritePage> {
                         height: 90,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: NetworkImage(
-                                    songlist![index].img.toString()),
+                                image:
+                                    NetworkImage(songs![index].img.toString()),
                                 fit: BoxFit.contain)),
                       ),
                       Expanded(
@@ -116,7 +110,7 @@ class _FavoritePageState extends State<FavoritePage> {
                           child: Column(
                             children: <Widget>[
                               Text(
-                                songlist![index].title.toString(),
+                                songs![index].title.toString(),
                                 style: TextStyle(
                                   fontSize: 25,
                                   fontWeight: FontWeight.w600,
@@ -128,7 +122,7 @@ class _FavoritePageState extends State<FavoritePage> {
                               Expanded(
                                   child: Container(
                                       child: Text(
-                                songlist![index].description.toString(),
+                                songs![index].description.toString(),
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,

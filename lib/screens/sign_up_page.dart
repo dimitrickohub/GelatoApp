@@ -11,6 +11,11 @@ import 'package:flutter_application_2/theme/colors.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 
+const String kImageAsset = 'assets/images/logo.png';
+const String _kUserName = 'user_name';
+const String kPassword = 'password';
+const String kSingUp = 'sign_up';
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
@@ -20,14 +25,30 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   bool _loading = false;
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _passwordController2 = TextEditingController();
+  late TextEditingController _emailController;
+  late TextEditingController _passwordController;
+  late TextEditingController _passwordController2;
 
-  late String _email;
-  late String _password;
+  String? _email;
+  String? _password;
 
   AuthService _authService = AuthService();
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _passwordController2 = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _passwordController2.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +66,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Image(
                       width: 100,
                       height: 100,
-                      image: AssetImage('assets/images/logo.png'),
+                      image: AssetImage(kImageAsset),
                     ),
                     SizedBox(
                       width: 10,
@@ -97,7 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             controller: _emailController,
                             style: TextStyle(color: white),
                             decoration: InputDecoration(
-                              hintText: 'User name',
+                              hintText: getTranslated(context, _kUserName),
                               hintStyle: TextStyle(
                                 color: primary.withAlpha(120),
                               ),
@@ -135,7 +156,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             controller: _passwordController,
                             style: TextStyle(color: white),
                             decoration: InputDecoration(
-                              hintText: 'Passwords',
+                              hintText: getTranslated(context, kPassword),
                               hintStyle: TextStyle(
                                 color: primary.withAlpha(120),
                               ),
@@ -199,7 +220,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   borderRadius: BorderRadius.circular(10)),
                             ),
                             child: Text(
-                              getTranslated(context, 'sign_up')!,
+                              getTranslated(context, kSingUp)!,
                               style: TextStyle(
                                   color: white,
                                   fontWeight: FontWeight.w600,
@@ -244,12 +265,12 @@ class _SignUpPageState extends State<SignUpPage> {
   void _signUpButtonAction() async {
     _email = _emailController.text;
     _password = _passwordController.text;
-    SaveData.saveLoginPass(_email.trim(), _password.trim());
+    SaveData.saveLoginPass(_email!.trim(), _password!.trim());
 
-    if (_email.isEmpty || _password.isEmpty) return;
+    if (_email!.isEmpty || _password!.isEmpty) return;
 
     Userdom? user = await _authService.singUpWithEmailAndPassword(
-        _email.trim(), _password.trim());
+        _email!.trim(), _password!.trim());
     if (user == null) {
       Fluttertoast.showToast(
           msg: 'Can not Sign-Up you, please check your email and password',

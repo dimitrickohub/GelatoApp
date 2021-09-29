@@ -27,12 +27,6 @@ Locale _locale(String languageCode) {
     return Locale(ENGLISH, 'US');
   else
     return Locale(RUSSIAN, "RU");
-  // switch (languageCode) {
-  //   case ENGLISH:
-  //     return Locale(ENGLISH, 'US');
-  //   case RUSSIAN:
-  //     return Locale(RUSSIAN, "RU");
-  // }
 }
 
 String? getTranslated(BuildContext context, String key) {

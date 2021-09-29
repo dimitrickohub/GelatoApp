@@ -7,7 +7,6 @@ import 'package:audioplayers/audioplayers.dart';
 class MusicData extends StatefulWidget {
   final String? title;
   final String? description;
-
   final String? img;
   final String? songUrl;
 

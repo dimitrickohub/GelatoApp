@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/screens/favorite_page.dart';
 import 'package:flutter_application_2/screens/home_page.dart';
-import 'package:flutter_application_2/screens/search_page.dart';
+import 'package:flutter_application_2/screens/search_page/search_page.dart';
 
 import 'package:flutter_application_2/theme/colors.dart';
 
