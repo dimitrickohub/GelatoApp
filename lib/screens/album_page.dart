@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_application_2/classes/favorite_list.dart';
+import 'package:flutter_application_2/db/database_helper.dart';
+
 import 'package:flutter_application_2/localization/language_constants.dart';
 
 import 'package:flutter_application_2/screens/music_data.dart';
@@ -18,15 +20,52 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AlbumPage extends StatefulWidget {
   final song;
 
-  const AlbumPage({Key? key, this.song}) : super(key: key);
+  const AlbumPage({
+    Key? key,
+    this.song,
+  }) : super(key: key);
   @override
   _AlbumPageState createState() => _AlbumPageState();
 }
 
 class _AlbumPageState extends State<AlbumPage> {
-  bool _isSub = true;
+  bool _isSub = false;
 
   List<FavoriteList>? music;
+
+  final dbHelper = DatabaseHelper.instance;
+
+  @override
+  void initState() {
+    super.initState();
+
+    getSubValues();
+
+    _saveFavorites();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _saveFavorites();
+  }
+
+  void _insert() async {
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnImg: widget.song?.img,
+      DatabaseHelper.columnTitle: widget.song?.title,
+      DatabaseHelper.columnDescription: widget.song?.description,
+      DatabaseHelper.columnSongUrl: widget.song?.songUrl
+    };
+    final id = await dbHelper.insert(row);
+    print('inserted row id: $id');
+  }
+
+  void _query() async {
+    final allRows = await dbHelper.queryAllRows();
+    print('query all rows:');
+    allRows.forEach(print);
+  }
 
   void _saveFavorites() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -37,27 +76,29 @@ class _AlbumPageState extends State<AlbumPage> {
         title: widget.song?.title,
         description: widget.song?.description,
         songUrl: widget.song?.songUrl,
-      )
+      ),
     ]);
 
-    prefs.setString('favList', encodedData);
+    prefs.setString('${widget.song?.description}', encodedData);
   }
 
-  // void _toggleFavorite() {
-  //   setState(() {
-  //     if (_isSub) {
-  //       _isSub = false;
-  //     } else {
-  //       _isSub = true;
-  //     }
-  //   });
-  // }
+  getSubValues() async {
+    _isSub = await getSubState();
+    setState(() {});
+  }
 
-  @override
-  void initState() {
-    super.initState();
+  Future<void> saveSubState(bool? value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('${widget.song?.title}', value!);
+    print('${widget.song?.title} Value saved $value');
+  }
 
-    _saveFavorites();
+  Future<bool> getSubState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _isSub = prefs.getBool('${widget.song?.title}') ?? false;
+    print(_isSub);
+
+    return _isSub;
   }
 
   @override
@@ -84,8 +125,6 @@ class _AlbumPageState extends State<AlbumPage> {
 
             var size = MediaQuery.of(context).size;
             final songs = snapshot.data!.body!;
-            // ignore: unused_local_variable
-            int index = 0;
 
             return LayoutBuilder(builder:
                 (BuildContext context, BoxConstraints viewportConstraints) {
@@ -139,16 +178,15 @@ class _AlbumPageState extends State<AlbumPage> {
                                       ),
                                     ),
                                     onPressed: () async {
+                                      bool value = true;
                                       setState(() {
-                                        if (_isSub) {
-                                          _isSub = false;
-                                        } else {
-                                          _isSub = true;
-                                        }
+                                        _isSub = value;
+                                        saveSubState(value);
+                                        print('Saved state is $_isSub');
                                       });
-                                      // _toggleFavorite();
-
                                       _saveFavorites();
+                                      _insert();
+                                      _query();
                                     }),
                               ),
                             ],
