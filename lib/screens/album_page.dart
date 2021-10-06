@@ -31,8 +31,6 @@ class AlbumPage extends StatefulWidget {
 class _AlbumPageState extends State<AlbumPage> {
   bool _isSub = false;
 
-  List<FavoriteList>? music;
-
   final dbHelper = DatabaseHelper.instance;
 
   @override
@@ -40,14 +38,11 @@ class _AlbumPageState extends State<AlbumPage> {
     super.initState();
 
     getSubValues();
-
-    _saveFavorites();
   }
 
   @override
   void dispose() {
     super.dispose();
-    _saveFavorites();
   }
 
   void _insert() async {
@@ -65,21 +60,6 @@ class _AlbumPageState extends State<AlbumPage> {
     final allRows = await dbHelper.queryAllRows();
     print('query all rows:');
     allRows.forEach(print);
-  }
-
-  void _saveFavorites() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    final String encodedData = FavoriteList.encode([
-      FavoriteList(
-        img: widget.song?.img,
-        title: widget.song?.title,
-        description: widget.song?.description,
-        songUrl: widget.song?.songUrl,
-      ),
-    ]);
-
-    prefs.setString('${widget.song?.description}', encodedData);
   }
 
   getSubValues() async {
@@ -184,7 +164,7 @@ class _AlbumPageState extends State<AlbumPage> {
                                         saveSubState(value);
                                         print('Saved state is $_isSub');
                                       });
-                                      _saveFavorites();
+
                                       _insert();
                                       _query();
                                     }),
