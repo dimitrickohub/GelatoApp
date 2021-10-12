@@ -1,11 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/classes/favorite_list.dart';
+
+import 'package:flutter_application_2/db/database_helper.dart';
+
 import 'package:flutter_application_2/localization/language_constants.dart';
 import 'package:flutter_application_2/screens/music_data.dart';
 
-import 'package:page_transition/page_transition.dart';
+import 'package:flutter_application_2/theme/colors.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:page_transition/page_transition.dart';
 
 class FavoritePage extends StatefulWidget {
   @override
@@ -13,25 +17,7 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  List<FavoriteList>? songs;
-  List<FavoriteList>? songlist;
-  String? songsString;
-  Future _fetchSongs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      songsString = (prefs.getString('favList') ?? '');
-      songs = FavoriteList.decode(songsString.toString());
-    });
-
-    return songs;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchSongs();
-  }
-
+  final dbHelper = DatabaseHelper.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,65 +60,77 @@ class _FavoritePageState extends State<FavoritePage> {
           itemCount: snapshot.data!.length,
           padding: EdgeInsets.all(8),
           itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        alignment: Alignment.bottomCenter,
-                        child: MusicData(
-                          title: songs![index].title.toString(),
-                          description: songs![index].description.toString(),
-                          img: songs![index].img.toString(),
-                          songUrl: songs![index].songUrl.toString(),
-                        ),
-                        type: PageTransitionType.scale));
-              },
-              child: Card(
-                elevation: 4,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        width: 90,
-                        height: 90,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image:
-                                    NetworkImage(songs![index].img.toString()),
-                                fit: BoxFit.contain)),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 60,
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                songs![index].title.toString(),
-                                style: const TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Expanded(
-                                  child: Container(
-                                      child: Text(
-                                songs![index].description.toString(),
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ))),
-                            ],
+            return Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              actionExtentRatio: 0.25,
+              actions: <Widget>[
+                IconSlideAction(
+                  caption: 'Delete',
+                  color: red,
+                  icon: CupertinoIcons.delete,
+                  onTap: () => dbHelper.delete(snapshot.data[index]['_id']),
+                ),
+              ],
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          alignment: Alignment.bottomCenter,
+                          child: MusicData(
+                            title: snapshot.data[index]['title'],
+                            description: snapshot.data[index]['description'],
+                            img: snapshot.data[index]['img'],
+                            songUrl: snapshot.data[index]['songUrl'],
                           ),
+                          type: PageTransitionType.scale));
+                },
+                child: Card(
+                  elevation: 4,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image:
+                                      NetworkImage(snapshot.data[index]['img']),
+                                  fit: BoxFit.contain)),
                         ),
-                      )
-                    ],
+                        Expanded(
+                          child: Container(
+                            height: 60,
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  snapshot.data[index]['title'],
+                                  style: const TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Expanded(
+                                    child: Container(
+                                        child: Text(
+                                  snapshot.data[index]['description'],
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ))),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -140,7 +138,7 @@ class _FavoritePageState extends State<FavoritePage> {
           },
         );
       },
-      future: _fetchSongs(),
+      future: dbHelper.queryAllRows(),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_application_2/classes/favorite_list.dart';
+
 import 'package:flutter_application_2/db/database_helper.dart';
 
 import 'package:flutter_application_2/localization/language_constants.dart';
@@ -38,11 +38,6 @@ class _AlbumPageState extends State<AlbumPage> {
     super.initState();
 
     getSubValues();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   void _insert() async {
@@ -187,19 +182,19 @@ class _AlbumPageState extends State<AlbumPage> {
                                   child: GestureDetector(
                                     onTap: () {
                                       Navigator.push(
-                                          context,
-                                          PageTransition(
-                                              alignment: Alignment.bottomCenter,
-                                              child: MusicData(
-                                                title:
-                                                    songs.result![index].title,
-                                                description: songs
-                                                    .result![index].description,
-                                                img: songs.result![index].img,
-                                                songUrl: songs
-                                                    .result![index].songUrl,
-                                              ),
-                                              type: PageTransitionType.scale));
+                                        context,
+                                        PageTransition(
+                                            alignment: Alignment.bottomCenter,
+                                            child: MusicData(
+                                              title: songs.result![index].title,
+                                              description: songs
+                                                  .result![index].description,
+                                              img: songs.result![index].img,
+                                              songUrl:
+                                                  songs.result![index].songUrl,
+                                            ),
+                                            type: PageTransitionType.scale),
+                                      );
                                     },
                                     child: Column(
                                       children: [
