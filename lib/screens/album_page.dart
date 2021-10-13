@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AlbumPage extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final song;
 
   const AlbumPage({
@@ -47,14 +48,16 @@ class _AlbumPageState extends State<AlbumPage> {
       DatabaseHelper.columnDescription: widget.song?.description,
       DatabaseHelper.columnSongUrl: widget.song?.songUrl
     };
+    // ignore: unused_local_variable
     final id = await dbHelper.insert(row);
-    print('inserted row id: $id');
+    // print('inserted row id: $id');
   }
 
   void _query() async {
+    // ignore: unused_local_variable
     final allRows = await dbHelper.queryAllRows();
-    print('query all rows:');
-    allRows.forEach(print);
+    // print('query all rows:');
+    // allRows.forEach(print);
   }
 
   getSubValues() async {
@@ -65,13 +68,13 @@ class _AlbumPageState extends State<AlbumPage> {
   Future<void> saveSubState(bool? value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('${widget.song?.title}', value!);
-    print('${widget.song?.title} Value saved $value');
+    // print('${widget.song?.title} Value saved $value');
   }
 
   Future<bool> getSubState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _isSub = prefs.getBool('${widget.song?.title}') ?? false;
-    print(_isSub);
+    // print(_isSub);
 
     return _isSub;
   }
@@ -103,7 +106,7 @@ class _AlbumPageState extends State<AlbumPage> {
 
             return LayoutBuilder(builder:
                 (BuildContext context, BoxConstraints viewportConstraints) {
-              return Container(
+              return SizedBox(
                 height: viewportConstraints.maxHeight,
                 child: SingleChildScrollView(
                     child: Stack(
@@ -132,38 +135,36 @@ class _AlbumPageState extends State<AlbumPage> {
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   )),
-                              Container(
-                                child: ElevatedButton(
-                                    child: Text(
-                                      _isSub
-                                          ? getTranslated(
-                                              context, 'subscription')!
-                                          : getTranslated(
-                                              context, 'subscribe')!,
+                              ElevatedButton(
+                                  child: Text(
+                                    _isSub
+                                        ? getTranslated(
+                                            context, 'subscription')!
+                                        : getTranslated(context, 'subscribe')!,
+                                  ),
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty
+                                        .resolveWith<Color>(
+                                      (Set<MaterialState> states) {
+                                        if (_isSub) {
+                                          return grey;
+                                        } else {
+                                          return primary;
+                                        }
+                                      },
                                     ),
-                                    style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty
-                                          .resolveWith<Color>(
-                                        (Set<MaterialState> states) {
-                                          if (_isSub)
-                                            return grey;
-                                          else
-                                            return primary;
-                                        },
-                                      ),
-                                    ),
-                                    onPressed: () async {
-                                      bool value = true;
-                                      setState(() {
-                                        _isSub = value;
-                                        saveSubState(value);
-                                        print('Saved state is $_isSub');
-                                      });
+                                  ),
+                                  onPressed: () async {
+                                    bool value = true;
+                                    setState(() {
+                                      _isSub = value;
+                                      saveSubState(value);
+                                      // print('Saved state is $_isSub');
+                                    });
 
-                                      _insert();
-                                      _query();
-                                    }),
-                              ),
+                                    _insert();
+                                    _query();
+                                  }),
                             ],
                           ),
                         ),
@@ -224,7 +225,7 @@ class _AlbumPageState extends State<AlbumPage> {
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        Container(
+                                        SizedBox(
                                             width: size.width - 210,
                                             child: Row(
                                               mainAxisAlignment:
@@ -293,7 +294,7 @@ class _AlbumPageState extends State<AlbumPage> {
                               },
                               child: Row(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width: (size.width - 60) * 0.77,
                                     child: Text(
                                       '${index + 1}' +
@@ -302,7 +303,7 @@ class _AlbumPageState extends State<AlbumPage> {
                                               .toString(),
                                     ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                       width: (size.width - 60) * 0.23,
                                       height: 50,
                                       child: Row(

@@ -23,6 +23,8 @@ const String kChangeLanguage = 'change_language';
 const String kLogOut = 'log_out';
 
 class SettingsPage extends StatefulWidget {
+  const SettingsPage({Key? key}) : super(key: key);
+
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -30,6 +32,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   String? _email;
   bool _isTap = false;
+  // ignore: prefer_typing_uninitialized_variables
   late var imagePicker;
 
   void _changeLanguage(Language language) async {
@@ -41,7 +44,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
     getInstance();
-    imagePicker = new ImagePicker();
+    imagePicker = ImagePicker();
   }
 
   void getInstance() async {
@@ -52,6 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   XFile? image;
+  // ignore: prefer_typing_uninitialized_variables
   var _image;
   _imgFromGallery() async {
     image = await imagePicker.pickImage(source: ImageSource.gallery);
@@ -92,10 +96,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   setState(() {
                     _isTap = false;
                   });
-                } else
+                } else {
                   setState(() {
                     _isTap = true;
                   });
+                }
                 currentTheme.switchTheme();
               },
               icon: Icon(
@@ -135,7 +140,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 onPressed: () async {
                   _imgFromGallery();
                 },
-                child: Text(''),
+                child: const Text(''),
               ),
             ),
             const SizedBox(
@@ -146,11 +151,13 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Text(
                   _email.toString(),
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600, fontSize: 15),
                 ),
                 Text(
                   getTranslated(context, 'my_profile')!,
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600, fontSize: 12),
                 ),
               ],
             ),
@@ -185,13 +192,11 @@ class _SettingsPageState extends State<SettingsPage> {
                                 border: Border.all(),
                                 color: grey,
                               ),
-                              child: Container(
-                                child: Text(
-                                  e.flag,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                              child: Text(
+                                e.flag,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -199,7 +204,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               width: 10,
                             ),
                             Text(e.name,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 )),
@@ -234,7 +239,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     context,
                     PageTransition(
                         alignment: Alignment.center,
-                        child: RegisterPage(),
+                        child: const RegisterPage(),
                         type: PageTransitionType.scale));
               },
             ),

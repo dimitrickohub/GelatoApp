@@ -12,7 +12,7 @@ class AuthService {
       User user = result.user!;
       return Userdom.fromFirebase(user);
     } catch (e) {
-      print(e);
+      // print(e);
       return null;
     }
   }
@@ -25,7 +25,7 @@ class AuthService {
       User user = result.user!;
       return Userdom.fromFirebase(user);
     } catch (e) {
-      print(e);
+      // print(e);
       return null;
     }
   }

@@ -12,6 +12,8 @@ import '../album_page.dart';
 List<Result> songList = [];
 
 class SearchContent extends StatefulWidget {
+  const SearchContent({Key? key}) : super(key: key);
+
   @override
   _SearchContentState createState() => _SearchContentState();
 }
@@ -39,13 +41,13 @@ class _SearchContentState extends State<SearchContent> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                  child: songList.length > 0
+                  child: songList.isNotEmpty
                       ? ListView.builder(
                           itemCount: songList.length,
                           itemBuilder: (context, index) => Card(
                                 color: primary.withAlpha(120),
                                 elevation: 4,
-                                margin: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 10),
                                 child: ListTile(
                                     leading: ConstrainedBox(
@@ -67,7 +69,7 @@ class _SearchContentState extends State<SearchContent> {
                                       ),
                                     ),
                                     subtitle: Text(
-                                      '${songList[index].title.toString()}',
+                                      songList[index].title.toString(),
                                       style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,

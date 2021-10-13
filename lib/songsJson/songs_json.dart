@@ -1,3 +1,4 @@
+// ignore: constant_identifier_names
 const List song_type_1 = [
   "Hip-hop",
   "Rock",
@@ -6,6 +7,7 @@ const List song_type_1 = [
   "Pop",
   "R&B",
 ];
+// ignore: constant_identifier_names
 const List song_type_2 = [
   "Podcasts",
   "Made For You",

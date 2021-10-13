@@ -11,6 +11,7 @@ import 'package:flutter_application_2/theme/colors.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:page_transition/page_transition.dart';
 
+// ignore: use_key_in_widget_constructors
 class FavoritePage extends StatefulWidget {
   @override
   _FavoritePageState createState() => _FavoritePageState();
@@ -58,10 +59,10 @@ class _FavoritePageState extends State<FavoritePage> {
         }
         return ListView.builder(
           itemCount: snapshot.data!.length,
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           itemBuilder: (context, index) {
             return Slidable(
-              actionPane: SlidableDrawerActionPane(),
+              actionPane: const SlidableDrawerActionPane(),
               actionExtentRatio: 0.25,
               actions: <Widget>[
                 IconSlideAction(
@@ -102,7 +103,7 @@ class _FavoritePageState extends State<FavoritePage> {
                                   fit: BoxFit.contain)),
                         ),
                         Expanded(
-                          child: Container(
+                          child: SizedBox(
                             height: 60,
                             child: Column(
                               children: <Widget>[
@@ -117,14 +118,13 @@ class _FavoritePageState extends State<FavoritePage> {
                                   height: 10,
                                 ),
                                 Expanded(
-                                    child: Container(
-                                        child: Text(
+                                    child: Text(
                                   snapshot.data[index]['description'],
                                   style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w600,
                                   ),
-                                ))),
+                                )),
                               ],
                             ),
                           ),

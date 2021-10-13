@@ -12,7 +12,7 @@ abstract class SongService extends ChopperService {
     final client = ChopperClient(
       baseUrl: 'https://run.mocky.io/v3/9425ee93-302f-4c5a-a760-8585c988b0aa',
       converter: ModelConverter(),
-      errorConverter: JsonConverter(),
+      errorConverter: const JsonConverter(),
       services: [
         _$SongService(),
       ],

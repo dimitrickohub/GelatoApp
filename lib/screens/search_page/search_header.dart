@@ -1,16 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/localization/language_constants.dart';
-import 'package:flutter_application_2/screens/search_page/search_content.dart';
 import 'package:flutter_application_2/songsJson/songs_model.dart';
 import 'package:flutter_application_2/theme/colors.dart';
 
 class SearchHeader extends StatefulWidget {
+  const SearchHeader({Key? key}) : super(key: key);
+
   @override
   State<SearchHeader> createState() => _SearchHeaderState();
 }
 
 class _SearchHeaderState extends State<SearchHeader> {
+  final List<Result> songList = [];
   // ignore: unused_field
   List<Result> _foundSongs = [];
 
@@ -20,10 +22,12 @@ class _SearchHeaderState extends State<SearchHeader> {
     if (enteredKeyword.isEmpty) {
       results = songList;
     } else {
-      results = songList.where((elem) => elem.title
-          .toString()
-          .toLowerCase()
-          .contains(enteredKeyword.toLowerCase()));
+      results = songList
+          .where((elem) => elem.title
+              .toString()
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
     }
 
     setState(() {

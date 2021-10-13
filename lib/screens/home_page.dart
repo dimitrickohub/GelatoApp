@@ -17,6 +17,8 @@ import 'album_page.dart';
 const _kExplore = 'explore';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -25,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   int activeMenu1 = 0;
   int activeMenu2 = 2;
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar() as PreferredSizeWidget?,
@@ -56,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                         context,
                         PageTransition(
                             alignment: Alignment.topRight,
-                            child: SettingsPage(),
+                            child: const SettingsPage(),
                             type: PageTransitionType.scale));
                   },
                   icon: const Icon(
@@ -192,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 180,
                                         child: Text(
                                             songs.result![index].description!
@@ -321,7 +324,7 @@ class _HomePageState extends State<HomePage> {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 180,
                                         child: Text(
                                             songs.result![index + 5].description

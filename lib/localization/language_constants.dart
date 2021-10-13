@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/localization/localization.dart';
 
@@ -23,10 +25,11 @@ Future<Locale> getLocale() async {
 
 // ignore: missing_return
 Locale _locale(String languageCode) {
-  if (languageCode == ENGLISH)
-    return Locale(ENGLISH, 'US');
-  else
-    return Locale(RUSSIAN, "RU");
+  if (languageCode == ENGLISH) {
+    return const Locale(ENGLISH, 'US');
+  } else {
+    return const Locale(RUSSIAN, "RU");
+  }
 }
 
 String? getTranslated(BuildContext context, String key) {

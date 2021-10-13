@@ -6,12 +6,14 @@ import 'package:flutter_application_2/screens/regisration_page.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatelessWidget {
+  const LandingPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final Userdom user = Provider.of<Userdom>(context);
     // ignore: unnecessary_null_comparison
     final bool isSignIn = user != null;
 
-    return isSignIn ? RootApp() : RegisterPage();
+    return isSignIn ? const RootApp() : const RegisterPage();
   }
 }

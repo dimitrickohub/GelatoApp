@@ -32,7 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
   String? _email;
   String? _password;
 
-  AuthService _authService = AuthService();
+  final AuthService _authService = AuthService();
 
   @override
   void initState() {
@@ -62,23 +62,25 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(
                     height: 50,
                   ),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    const Image(
-                      width: 100,
-                      height: 100,
-                      image: AssetImage(kImageAsset),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    const Text(
-                      'Gelatö',
-                      style: TextStyle(
-                          color: white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 30),
-                    ),
-                  ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Image(
+                          width: 100,
+                          height: 100,
+                          image: AssetImage(kImageAsset),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Gelatö',
+                          style: TextStyle(
+                              color: white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 30),
+                        ),
+                      ]),
                   const SizedBox(
                     height: 20,
                   ),
@@ -231,7 +233,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   _passwordController2.text.trim()) {
                                 _signUpButtonAction();
                                 setState(() => _loading = true);
-                              } else
+                              } else {
                                 Fluttertoast.showToast(
                                     msg: 'Password mismatch',
                                     toastLength: Toast.LENGTH_LONG,
@@ -240,6 +242,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     backgroundColor: Colors.red,
                                     textColor: white,
                                     fontSize: 16.0);
+                              }
                             },
                           )
                         : const Center(
@@ -257,7 +260,7 @@ class _SignUpPageState extends State<SignUpPage> {
   void _pageTransition() {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => RootApp()),
+      MaterialPageRoute(builder: (context) => const RootApp()),
       (Route<dynamic> route) => false,
     );
   }

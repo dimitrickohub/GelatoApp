@@ -46,6 +46,7 @@ class _MyAppState extends State<MyApp> {
   void getInstance() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
+      // ignore: unnecessary_null_in_if_null_operators
       _email = (prefs.getString('email') ?? null);
     });
   }
@@ -54,7 +55,7 @@ class _MyAppState extends State<MyApp> {
   void didChangeDependencies() {
     getLocale().then((locale) {
       setState(() {
-        this._locale = locale;
+        _locale = locale;
       });
     });
     super.didChangeDependencies();
@@ -65,7 +66,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     getInstance();
     currentTheme.addListener(() {
-      print('Changes');
+      // print('Changes');
       setState(() {});
     });
   }
@@ -74,12 +75,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     MyDarkTheme darkTheme = MyDarkTheme(isDark: true);
     MyLightTheme lightTheme = MyLightTheme(isDark: false);
-    if (this._locale == null) {
-      return Container(
-        child: Center(
-          child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color?>(Colors.blue[800])),
-        ),
+    if (_locale == null) {
+      return Center(
+        child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color?>(Colors.blue[800])),
       );
     } else {
       return StreamProvider<Userdom?>.value(
@@ -93,13 +92,13 @@ class _MyAppState extends State<MyApp> {
             theme: lightTheme.themeData,
             darkTheme: darkTheme.themeData,
             themeMode: currentTheme.carrentTheme(),
-            home: SplashScreen(),
+            home: const SplashScreen(),
             locale: _locale,
-            supportedLocales: [
+            supportedLocales: const [
               Locale("en", "US"),
               Locale("ru", "RU"),
             ],
-            localizationsDelegates: [
+            localizationsDelegates: const [
               Localization.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,

@@ -9,15 +9,44 @@ import 'package:flutter_application_2/theme/colors.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-import '../album_page.dart';
+import 'album_page.dart';
 
 class SearchPage extends StatefulWidget {
+  const SearchPage({Key? key}) : super(key: key);
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
-  dynamic songList;
+  List<Result> songList = [];
+  // ignore: unused_field
+  List<Result> _foundSongs = [];
+
+  @override
+  initState() {
+    _foundSongs = songList;
+    super.initState();
+  }
+
+  void _runFilter(String enteredKeyword) async {
+    dynamic results = [];
+
+    if (enteredKeyword.isEmpty) {
+      results = songList;
+    } else {
+      results = songList
+          .where((elem) => elem.title
+              .toString()
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+
+    setState(() {
+      _foundSongs = results;
+    });
+  }
 
   FutureBuilder<Response<SongsJson>> _buildBody() {
     return FutureBuilder<Response<SongsJson>>(
@@ -34,19 +63,19 @@ class _SearchPageState extends State<SearchPage> {
             );
           }
 
-          songList = snapshot.data!.body!.result;
+          songList = snapshot.data!.body!.result!;
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                  child: songList.length > 0
+                  child: _foundSongs.isNotEmpty
                       ? ListView.builder(
-                          itemCount: songList.length,
+                          itemCount: _foundSongs.length,
                           itemBuilder: (context, index) => Card(
                                 color: primary.withAlpha(120),
                                 elevation: 4,
-                                margin: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 10),
                                 child: ListTile(
                                     leading: ConstrainedBox(
@@ -57,18 +86,18 @@ class _SearchPageState extends State<SearchPage> {
                                         maxHeight: 50,
                                       ),
                                       child: Image.network(
-                                          songList[index].img.toString(),
+                                          _foundSongs[index].img.toString(),
                                           fit: BoxFit.cover),
                                     ),
                                     title: Text(
-                                      songList[index].description.toString(),
+                                      _foundSongs[index].description.toString(),
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     subtitle: Text(
-                                      '${songList[index].title.toString()}',
+                                      _foundSongs[index].title.toString(),
                                       style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
@@ -80,7 +109,7 @@ class _SearchPageState extends State<SearchPage> {
                                           PageTransition(
                                               alignment: Alignment.bottomCenter,
                                               child: AlbumPage(
-                                                song: songList[index],
+                                                song: _foundSongs[index],
                                               ),
                                               type: PageTransitionType.scale));
                                     }),
@@ -156,45 +185,16 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  // ignore: unused_field
-  dynamic _foundSongs = [];
-
   @override
-  initState() {
-    _foundSongs = songList;
-    super.initState();
-  }
-
-  void _runFilter(String enteredKeyword) async {
-    dynamic results = [];
-
-    if (enteredKeyword.isEmpty) {
-      results = songList;
-    } else {
-      results = songList.where((elem) => elem['title']
-          .toString()
-          .toLowerCase()
-          .contains(enteredKeyword.toLowerCase()));
-    }
-
-    setState(() {
-      _foundSongs = results;
-    });
-  }
-
   Widget build(BuildContext context) {
     return Scaffold(
-      body: getBody(),
-    );
-  }
-
-  Widget getBody() {
-    return SafeArea(
-      child: Column(
-        children: <Widget>[
-          Flexible(flex: 1, child: _buildSearch()),
-          Flexible(flex: 3, child: _buildBody())
-        ],
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Flexible(flex: 1, child: _buildSearch()),
+            Flexible(flex: 3, child: _buildBody())
+          ],
+        ),
       ),
     );
   }

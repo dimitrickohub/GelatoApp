@@ -9,15 +9,15 @@ class SongsJson {
     if (json['result'] != null) {
       result = <Result>[];
       json['result'].forEach((v) {
-        result!.add(new Result.fromJson(v));
+        result!.add(Result.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.result != null) {
-      data['result'] = this.result!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (result != null) {
+      data['result'] = result!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -51,21 +51,21 @@ class Result {
     if (json['songs'] != null) {
       songs = <Songs>[];
       json['songs'].forEach((v) {
-        songs!.add(new Songs.fromJson(v));
+        songs!.add(Songs.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['img'] = this.img;
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['song_count'] = this.songCount;
-    data['date'] = this.date;
-    data['song_url'] = this.songUrl;
-    if (this.songs != null) {
-      data['songs'] = this.songs!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['img'] = img;
+    data['title'] = title;
+    data['description'] = description;
+    data['song_count'] = songCount;
+    data['date'] = date;
+    data['song_url'] = songUrl;
+    if (songs != null) {
+      data['songs'] = songs!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -83,9 +83,9 @@ class Songs {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['title'] = this.title;
-    data['duration'] = this.duration;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['title'] = title;
+    data['duration'] = duration;
     return data;
   }
 }

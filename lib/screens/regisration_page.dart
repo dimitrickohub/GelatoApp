@@ -39,7 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String? _email;
   String? _password;
 
-  AuthService _authService = AuthService();
+  final AuthService _authService = AuthService();
 
   @override
   void initState() {
@@ -60,22 +60,22 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: black,
       body: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
             const SizedBox(
               height: 50,
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const Image(
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
+              Image(
                 width: 100,
                 height: 100,
                 image: AssetImage(kLogoImage),
               ),
-              const SizedBox(
+              SizedBox(
                 width: 20,
               ),
-              const Text(
+              Text(
                 'Gelatö',
                 style: TextStyle(
                     color: white, fontWeight: FontWeight.w600, fontSize: 30),
@@ -86,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Text(
                   getTranslated(context, kWelconeBack)!,
                   style: const TextStyle(
@@ -197,34 +197,32 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    getTranslated(context, kSingUpText)!,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  getTranslated(context, kSingUpText)!,
+                  style: const TextStyle(
+                      color: grey, fontWeight: FontWeight.w600, fontSize: 15),
+                ),
+                TextButton(
+                  child: Text(
+                    getTranslated(context, kSingUp)!,
                     style: const TextStyle(
-                        color: grey, fontWeight: FontWeight.w600, fontSize: 15),
+                        color: primary,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15),
                   ),
-                  TextButton(
-                    child: Text(
-                      getTranslated(context, kSingUp)!,
-                      style: const TextStyle(
-                          color: primary,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                              alignment: Alignment.center,
-                              child: SignUpPage(),
-                              type: PageTransitionType.scale));
-                    },
-                  ),
-                ],
-              ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            alignment: Alignment.center,
+                            child: const SignUpPage(),
+                            type: PageTransitionType.scale));
+                  },
+                ),
+              ],
             ),
           ],
         ),
@@ -235,7 +233,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void _pageTransition() {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => RootApp()),
+      MaterialPageRoute(builder: (context) => const RootApp()),
       (Route<dynamic> route) => false,
     );
   }

@@ -30,8 +30,8 @@ class _MusicDataState extends State<MusicData> {
   }
 
   initPalyer() {
-    advancedPlayer = new AudioPlayer();
-    audioCache = new AudioCache(fixedPlayer: advancedPlayer);
+    advancedPlayer = AudioPlayer();
+    audioCache = AudioCache(fixedPlayer: advancedPlayer);
     playSound(widget.songUrl);
   }
 
@@ -44,7 +44,7 @@ class _MusicDataState extends State<MusicData> {
   }
 
   seekSound() async {
-    advancedPlayer?.seek(Duration(milliseconds: 1200));
+    advancedPlayer?.seek(const Duration(milliseconds: 1200));
   }
 
   @override
@@ -89,8 +89,8 @@ class _MusicDataState extends State<MusicData> {
                   width: size.width - 100,
                   height: size.width - 100,
                   decoration: BoxDecoration(
-                    boxShadow: [
-                      const BoxShadow(
+                    boxShadow: const [
+                      BoxShadow(
                         color: grey,
                         blurRadius: 50,
                         spreadRadius: 5,
@@ -121,7 +121,7 @@ class _MusicDataState extends State<MusicData> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Container(
+            child: SizedBox(
               width: size.width - 80,
               height: 70,
               child: Row(
@@ -137,7 +137,7 @@ class _MusicDataState extends State<MusicData> {
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      Container(
+                      SizedBox(
                         width: 150,
                         child: Text(
                           widget.description.toString(),
@@ -225,16 +225,16 @@ class _MusicDataState extends State<MusicData> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
+            children: const [
+              Icon(
                 CupertinoIcons.tv,
                 color: primary,
                 size: 20,
               ),
-              const SizedBox(
+              SizedBox(
                 width: 10,
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 3),
                 child: Text(
                   'Chromecast is ready',

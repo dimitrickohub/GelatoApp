@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/screens/search_page/search_content.dart';
+import 'package:flutter_application_2/screens/search_page/search_collection.dart';
+
 import 'package:flutter_application_2/screens/search_page/search_header.dart';
 
 class SearchPage1 extends StatelessWidget {
@@ -10,9 +11,9 @@ class SearchPage1 extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: <Widget>[
+          children: const <Widget>[
             Flexible(flex: 1, child: SearchHeader()),
-            Flexible(flex: 3, child: SearchContent())
+            Flexible(flex: 3, child: SearchCollection())
           ],
         ),
       ),

@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/screens/favorite_page.dart';
 import 'package:flutter_application_2/screens/home_page.dart';
-import 'package:flutter_application_2/screens/search_page/search_page.dart';
+
+import 'package:flutter_application_2/screens/search_page/search_page1.dart';
 
 import 'package:flutter_application_2/theme/colors.dart';
 
 // import 'screens/favorite_page.dart';
 
 class RootApp extends StatefulWidget {
+  const RootApp({Key? key}) : super(key: key);
+
   @override
   _RootAppState createState() => _RootAppState();
 }
@@ -27,9 +30,10 @@ class _RootAppState extends State<RootApp> {
     return IndexedStack(
       index: activeTab,
       children: [
-        HomePage(),
-        SearchPage(),
-        // TestPage(),
+        const HomePage(),
+        const SearchPage1(),
+        // SearchPage(),
+
         FavoritePage(),
       ],
     );
@@ -44,7 +48,7 @@ class _RootAppState extends State<RootApp> {
     return Container(
         alignment: Alignment.center,
         height: 70,
-        decoration: BoxDecoration(),
+        decoration: const BoxDecoration(),
         child: Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Row(
